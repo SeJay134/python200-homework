@@ -55,3 +55,9 @@ print()
 
 print(df['grade'][df['grade'] > 80])
 print()
+
+# Pandas Question 3
+df['grade_curved'] = [0, 0, 0, 0, 0]
+df['grade_curved'] = df['grade'] + 5
+print(df)
+print()
