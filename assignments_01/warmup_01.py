@@ -119,3 +119,20 @@ new_ones_arr = np.ones((2, 5), dtype=int)
 print("new_zero_arr 2x5", new_ones_arr)
 print()
 
+# NumPy Question 5
+print("NumPy Question 5")
+arr_q5 = np.arange(0, 50, 5)
+print("arr_q5", arr_q5)
+
+print(arr_q5.shape)
+
+mean_arr_q5 = np.mean(arr_q5)
+print("mean_arr_q5", mean_arr_q5)
+
+sum_arr_q5 = np.sum(arr_q5)
+print("sum_arr_q5", sum_arr_q5)
+
+std_arr_q5 = np.std(arr_q5)
+print("std_arr_q5", std_arr_q5)
+print()
+
