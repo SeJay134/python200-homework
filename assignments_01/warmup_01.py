@@ -338,3 +338,17 @@ else:
 
 print()
 
+print("Hypothesis Question 4")
+scores = [72, 68, 75, 70, 69, 74, 71, 73]
+
+scores_t_stats, scores_p_value = stats.ttest_1samp(scores, 70)
+print("scores_t_stats", scores_t_stats)
+print("scores_p_value", scores_p_value)
+
+if scores_p_value > 0.05:
+    print("Fail to reject H0")
+else:
+    print("Reject H0")
+
+print()
+
