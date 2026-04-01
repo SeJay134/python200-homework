@@ -188,3 +188,18 @@ plt.ylabel("label")
 
 plt.show()
 
+# Matplotlib Question 4
+print("Matplotlib Question 4")
+
+plt.subplot(1, 2, 1)
+plt.plot(x, y)
+plt.title("plot_1_from_q1_line")
+
+plt.subplot(1, 2, 2)
+plt.bar(subjects, scores)
+plt.title("plot_2_from_q2_bar")
+
+plt.tight_layout()
+plt.show()
+print()
+
