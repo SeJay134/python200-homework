@@ -303,3 +303,15 @@ print("mode_data2", mode_data2)
 # The value 150 in data2 is an outlier because it is much larger than the other values
 print()
 
+# Hypothesis review
+print("Hypothesis Question 1")
+group_a = [72, 68, 75, 70, 69, 73, 71, 74]
+group_b = [80, 85, 78, 83, 82, 86, 79, 84]
+
+t_stats, p_value = stats.ttest_ind(group_a, group_b)
+print("t_stats", t_stats) # p high = H0, p low = not H0
+print("p_value", p_value) # If p value <= alpha we reject the null hypothesis, p-value > 0.05, we fail to reject the null hypothesis
+# Since the p-value is much less than 0.05, we reject the null hypothesis.
+# There is a statistically significant difference between the two groups.
+print()
+
