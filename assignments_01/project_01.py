@@ -37,3 +37,11 @@ def read_csv_file(files):
         raise ValueError("No valid CSV files were loaded")
     
     return pd.concat(df, ignore_index=True)
+
+@task(retries=3, retry_delay_seconds=2)
+def save_csv(df):
+    path = Path("assignments_01/outputs/merged_happiness.csv")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(path, index=False)
+    return path
+
