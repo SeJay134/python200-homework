@@ -45,3 +45,22 @@ def save_csv(df):
     df.to_csv(path, index=False)
     return path
 
+@task
+def log_columns(df):
+    logger = get_run_logger()
+    logger.info(f"Columns:\n {list(df.columns)}")
+    logger.info(f"dtypes:\n {list(df.dtypes)}")
+    logger.info(f"len:\n {len(df)}")
+    logger.info(f"First 5 rows:\n {df.head()}")
+    logger.info(f"Last 5 rows:\n {df.tail()}")
+
+    if df.isna().sum().sum() > 0:
+        logger.warning("df has missed values")
+    
+    if df.empty:
+        logger.error("df is empty")
+
+    if df.duplicated().sum() > 0:
+        logger.error("df has dublicates")
+    return df
+
