@@ -352,3 +352,20 @@ else:
 
 print()
 
+print("Hypothesis Question 5")
+t_stats_group, p_value_group = stats.ttest_ind(group_a, group_b, alternative="less")
+print("t_stats_group", t_stats_group)
+print("p_value_group", p_value_group)
+
+if p_value_group > 0.05:
+    print("Fail to reject H0, a > b")
+else:
+    print("Reject H0, a < b")
+
+print()
+
+print("Hypothesis Question 6")
+print("The t-test and p-value calculations showed a significant difference between groups A and B, leading to the rejection of the null hypothesis. The variability in group B allowed us to perform a one-tailed test using alternative='less' to assess whether group A scores are significantly lower than those of group B.")
+
+print()
+
