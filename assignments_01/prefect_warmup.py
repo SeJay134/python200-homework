@@ -23,3 +23,22 @@ def summarize_data(clean):
     mode_clean = stats.mode(clean)[0]
     return mean_clean, median_clean, std_clean, mode_clean
 
+@flow
+def data_pipeline(arr):
+    s = create_series(arr)
+    clean = clean_data(s)
+    summ = summarize_data(clean)
+    return summ
+
+if __name__ == "__main__":
+    mean, median, std, mode = data_pipeline(arr)
+    print("mean:", mean, "median:", median, "std:", std, "mode:", mode)
+
+# This pipeline is very simple and operates on a small dataset, so using Prefect introduces unnecessary overhead. 
+# It requires additional setup, such as defining tasks and flows, 
+# which makes the code more complex without providing significant benefits for such a small use case.
+
+# Prefect can be useful in more realistic scenarios such as web scraping, data analysis, 
+# and data visualization pipelines. For example, when data needs to be collected regularly, 
+# cleaned, processed, and visualized automatically, Prefect helps manage dependencies between tasks, handle errors, 
+# and schedule workflows.
