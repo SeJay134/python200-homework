@@ -369,3 +369,15 @@ print("The t-test and p-value calculations showed a significant difference betwe
 
 print()
 
+# Correlation Review
+print("Correlation Question 1")
+x_cm = [1, 2, 3, 4, 5]
+y_cm = [2, 4, 6, 8, 10]
+
+print("corrcoef(x_cm, y_cm)", np.corrcoef(x_cm, y_cm))
+
+cor_coef = np.corrcoef(x_cm, y_cm)[0, 1]
+print("cor_coef", cor_coef)
+print("The positive correlation was expected, and this is confirmed by the positive correlation coefficient")
+print()
+
