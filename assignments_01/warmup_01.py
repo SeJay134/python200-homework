@@ -82,3 +82,15 @@ print()
 print(df.sort_values(by='grade', ascending=False)[:3])
 print()
 
+import numpy as np
+
+# NumPy Review
+
+# NumPy Question 1
+print("NumPy Question 1")
+arr1d = np.array([10, 20, 30, 40, 50])
+print("arr1d.shape", arr1d.shape)
+print("arr1d.ndim", arr1d.ndim)
+print("arr1d.dtype", arr1d.dtype)
+print()
+
