@@ -245,3 +245,36 @@ plt.ylabel("Scores")
 plt.show()
 print()
 
+# Descriptive Stats Question 4
+print("Descriptive Stats Question 4")
+normal_data = np.random.normal(50, 5, 200)
+
+mean_normal_data = np.mean(normal_data)
+print("mean_normal_data", mean_normal_data)
+median_normal_data = np.median(normal_data)
+print("median_normal_data", median_normal_data)
+var_normal_data = np.var(normal_data)
+print("var_normal_data", var_normal_data)
+std_normal_data = np.std(normal_data)
+print("std_normal_data", std_normal_data)
+
+skewed_data = np.random.exponential(10, 200)
+mean_skewed_data = np.mean(skewed_data)
+print("mean_skewed_data", mean_skewed_data)
+median_skewed_data = np.median(skewed_data)
+print("median_skewed_data", median_skewed_data)
+var_skewed_data = np.var(skewed_data)
+print("var_skewed_data", var_skewed_data)
+std_skewed_data = np.std(skewed_data)
+print("std_skewed_data", std_skewed_data)
+
+plt.figure()
+plt.boxplot([normal_data, skewed_data], labels=["Normal", "Exponential"])
+plt.title("Distribution Comparison")
+plt.xlabel("x")
+plt.ylabel("y")
+
+plt.show()
+
+print()
+
