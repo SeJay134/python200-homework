@@ -315,3 +315,11 @@ print("p_value", p_value) # If p value <= alpha we reject the null hypothesis, p
 # There is a statistically significant difference between the two groups.
 print()
 
+print("Hypothesis Question 2")
+if p_value > 0.05:
+    print("Fail to reject H0")
+else:
+    print("Reject H0")
+
+print()
+
