@@ -136,3 +136,31 @@ std_arr_q5 = np.std(arr_q5)
 print("std_arr_q5", std_arr_q5)
 print()
 
+# NumPy Question 6
+print("NumPy Question 6")
+arr_q6 = np.random.normal(size=200)
+print("arr_q6", arr_q6)
+
+mean_arr_q6 = np.mean(arr_q6)
+print("mean_arr_q6", mean_arr_q6)
+std_arr_q6 = np.std(arr_q6)
+print("std_arr_q6", std_arr_q6)
+print()
+
+
+import matplotlib.pyplot as plt
+
+# Matplotlib Question 1
+
+print("Matplotlib Question 1")
+x = [0, 1, 2, 3, 4, 5]
+y = [0, 1, 4, 9, 16, 25]
+
+plt.figure(figsize=(6, 6))
+plt.plot(x, y, label="line_plot_q1")
+plt.title('Squares')
+plt.xlabel("x")
+plt.ylabel("y")
+
+plt.show()
+
