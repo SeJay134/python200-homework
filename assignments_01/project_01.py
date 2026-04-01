@@ -124,3 +124,21 @@ def happiness_score_descr_stat(db_clean):
 
     return mean_data, median_data, std_data, year_group_mean, reg_group_mean
 
+# Task 3: Visual Exploration
+# A histogram of all happiness scores across all years. Save as happiness_histogram.png.
+@task
+def plot_hist(db_clean):
+    logger = get_run_logger()
+    path = Path("assignments_01/outputs/happiness_histogram.png")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.figure(figsize=(8, 5))
+    sns.histplot(db_clean["Happiness score"], bins=30, edgecolor="black")
+    plt.title("All happiness scores across all years")
+    plt.xlabel("Happiness score")
+    plt.ylabel("Frequency")
+    plt.savefig(path, dpi=300)
+    plt.close()
+
+    logger.info(f"plot_hist")
+    return path
+
