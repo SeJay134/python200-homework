@@ -164,3 +164,14 @@ plt.ylabel("y")
 
 plt.show()
 
+# Matplotlib Question 2
+print("Matplotlib Question 2")
+subjects = ["Math", "Science", "English", "History"]
+scores   = [88, 92, 75, 83]
+plt.bar(subjects, scores)
+plt.title("Subject Scores")
+plt.xlabel("label")
+plt.ylabel("label")
+
+plt.show()
+
