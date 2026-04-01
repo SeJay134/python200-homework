@@ -216,3 +216,18 @@ print("variance_data", variance_data)
 std_data = np.std(data)
 print("std_data", std_data)
 print()
+
+# Descriptive Stats Question 2
+print("Descriptive Stats Question 2")
+arr_val_500 = np.random.normal(65, 10, 500)
+print("arr_val_500", arr_val_500[:5])
+
+plt.figure(figsize=(6, 6))
+plt.hist(arr_val_500, bins=20)
+plt.title("Distribution of Scores")
+plt.xlabel("Scores")
+plt.ylabel("Frequency")
+
+plt.show()
+print()
+
