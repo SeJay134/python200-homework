@@ -424,3 +424,12 @@ plt.ylabel("y")
 plt.show()
 print()
 
+print("Correlation Question 5")
+import seaborn as sns
+
+plt.figure()
+sns.heatmap(corr_matrix, annot=True)
+plt.title("Correlation Heatmap")
+plt.show()
+print()
+
