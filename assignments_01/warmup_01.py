@@ -406,3 +406,21 @@ corr_matrix = df.corr()
 print("corr_matrix", corr_matrix)
 print()
 
+print("Correlation Question 4")
+x = [10, 20, 30, 40, 50]
+y = [90, 75, 60, 45, 30]
+
+corr_cq4 = pearsonr(x, y)
+
+print("corr_cq4", corr_cq4)
+print(np.corrcoef(x, y))
+
+plt.figure()
+plt.scatter(x, y)
+plt.title("Negative Correlation")
+plt.xlabel("x")
+plt.ylabel("y")
+
+plt.show()
+print()
+
