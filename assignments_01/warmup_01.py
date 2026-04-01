@@ -323,3 +323,18 @@ else:
 
 print()
 
+print("Hypothesis Question 3")
+before = [60, 65, 70, 58, 62, 67, 63, 66]
+after  = [68, 70, 76, 65, 69, 72, 70, 71]
+
+value_t_stats, value_p_value = stats.ttest_ind(before, after)
+print("value_t_stats", value_t_stats)
+print("value_p_value", value_p_value)
+
+if value_p_value > 0.05:
+    print("Fail to reject H0")
+else:
+    print("Reject H0")
+
+print()
+
