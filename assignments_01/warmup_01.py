@@ -381,3 +381,16 @@ print("cor_coef", cor_coef)
 print("The positive correlation was expected, and this is confirmed by the positive correlation coefficient")
 print()
 
+print("Correlation Question 2")
+from scipy.stats import pearsonr
+
+x = [1,  2,  3,  4,  5,  6,  7,  8,  9, 10]
+y = [10, 9,  7,  8,  6,  5,  3,  4,  2,  1]
+
+corr = pearsonr(x, y)
+print(corr)
+# statistic = -0.976 - strong negative correlation
+# As "x" increases, "y" generally decreases → negative relationship.
+# pvalue ≈ 0 - the correlation is statistically significant
+print()
+
