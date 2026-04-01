@@ -94,3 +94,12 @@ print("arr1d.ndim", arr1d.ndim)
 print("arr1d.dtype", arr1d.dtype)
 print()
 
+# NumPy Question 2
+print("NumPy Question 2")
+arr = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
+print("arr.size", arr.size)
+print("arr.shape", arr.shape)
+print()
+
