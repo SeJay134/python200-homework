@@ -103,3 +103,10 @@ print("arr.size", arr.size)
 print("arr.shape", arr.shape)
 print()
 
+# NumPy Question 3
+print("NumPy Question 3")
+two_d = arr[:2, 0:2] # 2D
+print("two_d", two_d)
+print("two_d.shape", two_d.shape)
+print()
+
