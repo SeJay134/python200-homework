@@ -73,3 +73,8 @@ avg_city = df.groupby('city')['grade'].mean()
 print(avg_city)
 print()
 
+# Pandas Question 6
+df.replace('Austin', 'Houston', inplace=True)
+print(df[['name', 'city']])
+print()
+
