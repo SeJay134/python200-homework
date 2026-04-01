@@ -193,3 +193,34 @@ def corr_heatmap(db_clean):
     logger.info(f"corr_heatmap")
     return path
 
+# Task 4: Hypothesis Testing
+# The pandemic began in early 2020. Did it affect global happiness scores? Test this directly: 
+# run an independent samples t-test comparing happiness scores from 2019 to 2020.
+
+# Log the t-statistic, p-value, the mean happiness for each group, and a plain-language interpretation of the result 
+# at alpha = 0.05. Your interpretation should say something meaningful -- not just "we reject the null hypothesis" 
+# but what that actually means in terms of this data.
+
+# Add a second test of your choice (for example, comparing two specific regions that you expect to differ based on 
+# the descriptive statistics you computed earlier).
+
+@task
+def stats_test(db_clean):
+    logger = get_run_logger()
+    hap_score_2019 = db_clean[db_clean["Year"] == 2019]["Happiness score"]
+    hap_score_2020 = db_clean[db_clean["Year"] == 2020]["Happiness score"]
+    t_stat, p_stat = stats.ttest_ind(hap_score_2019, hap_score_2020, equal_var=False)
+    mean_2019 = hap_score_2019.mean()
+    mean_2020 = hap_score_2020.mean()
+    logger.info(f"Mean happiness 2019: {mean_2019:.3f}, Mean happiness 2020: {mean_2020:.3f}")
+
+    if p_stat < 0.05:
+        if mean_2019 > mean_2020:
+            logger.info(f"Happiness scores decreased significantly from 2019 to 2020.")
+        else:
+            logger.info(f"Happiness scores increased significantly from 2019 to 2020.")
+    else:
+        logger.info(f"No statistically significant change in happiness scores between 2019 and 2020.")
+
+    logger.info(f"t_stat: {t_stat:.5F}, p_stat: {p_stat:.5F}")
+    return t_stat, p_stat, mean_2019, mean_2020
