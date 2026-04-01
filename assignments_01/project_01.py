@@ -40,7 +40,7 @@ def read_csv_file(files):
 
 @task(retries=3, retry_delay_seconds=2)
 def save_csv(df):
-    path = Path("assignments_01/outputs/merged_happiness.csv")
+    path = Path("outputs/merged_happiness.csv")
     path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(path, index=False)
     return path
@@ -129,7 +129,7 @@ def happiness_score_descr_stat(db_clean):
 @task
 def plot_hist(db_clean):
     logger = get_run_logger()
-    path = Path("assignments_01/outputs/happiness_histogram.png")
+    path = Path("outputs/happiness_histogram.png")
     path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(8, 5))
     sns.histplot(db_clean["Happiness score"], bins=30, edgecolor="black")
@@ -146,7 +146,7 @@ def plot_hist(db_clean):
 @task
 def plot_box(db_clean):
     logger = get_run_logger()
-    path = Path("assignments_01/outputs/happiness_by_year.png")
+    path = Path("outputs/happiness_by_year.png")
     path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(8, 5))
     sns.boxplot(data = db_clean, x = "Year", y = "Happiness score")
@@ -163,7 +163,7 @@ def plot_box(db_clean):
 @task
 def gdp_vs_happ(db_clean):
     logger = get_run_logger()
-    path = Path("assignments_01/outputs/gdp_vs_happiness.png")
+    path = Path("outputs/gdp_vs_happiness.png")
     path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(8, 5))
     sns.scatterplot(data=db_clean, x = "GDP per capita", y = "Happiness score")
@@ -182,7 +182,7 @@ def gdp_vs_happ(db_clean):
 def corr_heatmap(db_clean):
     logger = get_run_logger()
     corr_matrix = db_clean.corr(numeric_only=True)
-    path = Path("assignments_01/outputs/correlation_heatmap.png")
+    path = Path("outputs/correlation_heatmap.png")
     path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(10, 8))
     sns.heatmap(corr_matrix, annot=True, cmap="coolwarm")
