@@ -68,3 +68,8 @@ df['name_upper'] = df['name'].str.upper()
 print(df[['name', 'name_upper']])
 print()
 
+# Pandas Question 5
+avg_city = df.groupby('city')['grade'].mean()
+print(avg_city)
+print()
+
