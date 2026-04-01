@@ -78,3 +78,7 @@ df.replace('Austin', 'Houston', inplace=True)
 print(df[['name', 'city']])
 print()
 
+# Pandas Question 7
+print(df.sort_values(by='grade', ascending=False)[:3])
+print()
+
