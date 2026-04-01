@@ -278,3 +278,28 @@ plt.show()
 
 print()
 
+# Descriptive Stats Question 5
+from scipy import stats
+
+print("Descriptive Stats Question 5")
+data1 = [10, 12, 12, 16, 18]
+data2 = [10, 12, 12, 16, 150]
+
+mean_data1 = np.mean(data1)
+print("mean_data1", mean_data1)
+median_data1 = np.median(data1)
+print("median_data1", median_data1)
+mode_data1 = stats.mode(data1)
+print("mode_data1", mode_data1)
+
+mean_data2 = np.mean(data2)
+print("mean_data2", mean_data2)
+median_data2 = np.median(data2)
+print("median_data2", median_data2)
+mode_data2 = stats.mode(data2)
+print("mode_data2", mode_data2)
+
+# markdown
+# The value 150 in data2 is an outlier because it is much larger than the other values
+print()
+
