@@ -61,3 +61,10 @@ df['grade_curved'] = [0, 0, 0, 0, 0]
 df['grade_curved'] = df['grade'] + 5
 print(df)
 print()
+
+# Pandas Question 4
+df['name_upper'] = ['', '', '', '', '']
+df['name_upper'] = df['name'].str.upper()
+print(df[['name', 'name_upper']])
+print()
+
