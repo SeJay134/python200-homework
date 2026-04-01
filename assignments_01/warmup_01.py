@@ -394,3 +394,15 @@ print(corr)
 # pvalue ≈ 0 - the correlation is statistically significant
 print()
 
+print("Correlation Question 3")
+people = {
+    "height": [160, 165, 170, 175, 180],
+    "weight": [55,  60,  65,  72,  80],
+    "age":    [25,  30,  22,  35,  28]
+}
+df = pd.DataFrame(people)
+
+corr_matrix = df.corr()
+print("corr_matrix", corr_matrix)
+print()
+
