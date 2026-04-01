@@ -110,3 +110,12 @@ print("two_d", two_d)
 print("two_d.shape", two_d.shape)
 print()
 
+# NumPy Question 4 3x4 2x5
+print("NumPy Question 4")
+new_zero_arr = np.zeros((3, 4), dtype=int)
+print("new_zero_arr 3x4", new_zero_arr)
+print()
+new_ones_arr = np.ones((2, 5), dtype=int)
+print("new_zero_arr 2x5", new_ones_arr)
+print()
+
