@@ -203,3 +203,16 @@ plt.tight_layout()
 plt.show()
 print()
 
+# Descriptive Stats Question 1
+print("Descriptive Stats Question 1")
+data = [12, 15, 14, 10, 18, 22, 13, 16, 14, 15]
+
+mean_data = np.mean(data)
+print("mean_data", mean_data)
+median_data = np.median(data)
+print("median_data", median_data)
+variance_data = np.var(data)
+print("variance_data", variance_data)
+std_data = np.std(data)
+print("std_data", std_data)
+print()
