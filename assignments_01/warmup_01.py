@@ -175,3 +175,16 @@ plt.ylabel("label")
 
 plt.show()
 
+# Matplotlib Question 3
+print("Matplotlib Question 3")
+x1, y1 = [1, 2, 3, 4, 5], [2, 4, 5, 4, 5]
+x2, y2 = [1, 2, 3, 4, 5], [5, 4, 3, 2, 1]
+
+plt.scatter(x1, y1, color="blue", label="datasets_1")
+plt.scatter(x2, y2, color="red", label="datasets_2")
+plt.title("scatter plot")
+plt.xlabel("label")
+plt.ylabel("label")
+
+plt.show()
+
