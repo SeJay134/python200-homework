@@ -433,3 +433,42 @@ plt.title("Correlation Heatmap")
 plt.show()
 print()
 
+# Pipeline Review
+
+print("Pipeline Question 1")
+arr = np.array([12.0, 15.0, np.nan, 14.0, 10.0, np.nan, 18.0, 14.0, 16.0, 22.0, np.nan, 13.0])
+
+def create_series(arr):
+    s = pd.Series(arr, name="values")
+    return s
+
+
+# Pipeline Review
+
+print("Pipeline Question 1")
+arr = np.array([12.0, 15.0, np.nan, 14.0, 10.0, np.nan, 18.0, 14.0, 16.0, 22.0, np.nan, 13.0])
+
+def create_series(arr):
+    s = pd.Series(arr, name="values")
+    return s
+
+def clean_data(s):
+    clean = s.dropna()
+    return clean
+
+def summarize_data(clean):
+    mean_clean = np.mean(clean)
+    median_clean = np.median(clean)
+    std_clean = np.std(clean)
+    mode_clean = stats.mode(clean)[0]
+    return mean_clean, median_clean, std_clean, mode_clean
+
+def data_pipeline(arr):
+    s = create_series(arr)
+    clean = clean_data(s)
+    summ = summarize_data(clean)
+    return summ
+
+mean, median, std, mode = data_pipeline(arr)
+print("mean:", mean, "median:", median, "std:", std, "mode:", mode)
+    
