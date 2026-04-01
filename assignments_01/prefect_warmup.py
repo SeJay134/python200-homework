@@ -15,3 +15,11 @@ def clean_data(s):
     clean = s.dropna()
     return clean
 
+@task(log_prints=True)
+def summarize_data(clean):
+    mean_clean = np.mean(clean)
+    median_clean = np.median(clean)
+    std_clean = np.std(clean)
+    mode_clean = stats.mode(clean)[0]
+    return mean_clean, median_clean, std_clean, mode_clean
+
