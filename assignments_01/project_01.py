@@ -142,3 +142,20 @@ def plot_hist(db_clean):
     logger.info(f"plot_hist")
     return path
 
+# A boxplot comparing happiness score distributions across years (one box per year). Save as happiness_by_year.png.
+@task
+def plot_box(db_clean):
+    logger = get_run_logger()
+    path = Path("assignments_01/outputs/happiness_by_year.png")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.figure(figsize=(8, 5))
+    sns.boxplot(data = db_clean, x = "Year", y = "Happiness score")
+    plt.title("Happiness score distributions across years")
+    plt.xlabel("Year")
+    plt.ylabel("Happiness score")
+    plt.savefig(path, dpi=300)
+    plt.close()
+
+    logger.info(f"plot_box")
+    return path
+
