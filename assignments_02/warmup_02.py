@@ -189,9 +189,34 @@ print(f'score_q3: {score_q3:.4f} \n')
 # The slope represents the increase in medical cost per additional year of age.
 # A positive slope means that older patients generally have higher medical costs
 
-# ----------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
 
+print('Linear Regression Question 4')
+# Now add smoker as a second feature and fit a new model.
+X_full = np.column_stack([age, smoker])
 
+X = age
+y = cost
+
+X_train_m, X_test_m, y_train_m, y_test_m = train_test_split(
+    X_full, y, test_size=0.2, random_state=42
+)
+
+model_full = LinearRegression()
+model_full.fit(X_train_m, y_train_m)
+# Split, fit, and print the test R². Compare it to the R² from Question 3 -- does adding 
+# the smoker flag help? Print both coefficients:
+
+print('age coefficient: ', model_full.coef_[0])
+print('smoker coefficient: ', model_full.coef_[1])
+
+# Add a comment interpreting the smoker coefficient: what does it represent in practical terms?
+
+# The smoker coefficient represents how much extra medical cost is expected for a smoker
+# compared to a non-smoker of the same age.
+print()
+
+# -----------------------------------------------------------------------------------
 
 
 
