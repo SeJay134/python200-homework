@@ -76,4 +76,9 @@ print('df.shape', df.shape)
 df_G3_filtered = df[df['G3'] != 0].copy()
 print('df_G3_filtered', df_G3_filtered.shape)
 
+# Students with G3=0 didn't take the final exam.
+# Keeping these rows would distort the model because it would treat missing exams as very low grades.
+
+
+
 
