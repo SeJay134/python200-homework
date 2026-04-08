@@ -195,5 +195,20 @@ print(f'rmse_q4: {rmse_q4:.4f}')
 score_q4 = model_q4.score(X_test_q4, y_test_q4)
 print(f'score_q4: {score_q4:.4f} \n')
 
+# The slope is negative, meaning that each additional failure reduces 
+# the final grade by about 1.4 points.
 
+# Since grades are on a 0–20 scale, this is a noticeable but not huge effect.
+# The RMSE shows the average prediction error.
+
+# For example, if RMSE ≈ 3, it means predictions are off by about ±3 grade points, 
+# which is quite large relative to the scale.
+
+# The R² score is relatively low, meaning that failures alone explains only 
+# a small portion of the variation in final grades.
+
+# This is expected based on exploratory analysis, since stronger predictors 
+# like G1 and G2 showed much higher correlations with G3.
+
+print()
 
