@@ -373,5 +373,37 @@ plt.show()
 # A likely explanation is that students who receive support are already struggling, 
 # so this variable reflects underlying difficulty rather than causing lower grades.
 
+print('Neglected Feature: The Power of G1')
+# Add G1 (first period grade) as a feature to the full model from Task 5 and refit. 
+# We kept it out because it is so powerful. Print the new test R². 
+# The jump will be large -- from roughly 0.30 to somewhere around 0.80.
+# Add a comment addressing these questions: does a high R² here mean G1 is causing G3? 
+# Is this a useful model for identifying students who might struggle? 
+# What might educators need to do if they wanted to intervene early, before G1 is even available?
 
+df_clean_G1 = df_G3_filtered
+
+feature_cols_G1 = ['failures', 'Medu', 'Fedu', 'studytime', 'higher', 'schoolsup',
+                'internet', 'sex', 'freetime', 'activities', 'traveltime', 'G1']
+X_G1 = df_clean_G1[feature_cols_G1].values
+y_G1 = df_clean_G1['G3'].values
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_G1, y_G1, test_size=0.2, random_state=42
+)
+
+model_G1 = LinearRegression()
+model_G1.fit(X_train, y_train)
+y_pred_G1 = model_G1.predict(X_test)
+
+print('Slope_G1:', model_G1.coef_[0])
+print('Intercept_G1:', model_G1.intercept_, '\n')
+
+rmse_G1 = np.sqrt(np.mean((y_pred_G1 - y_test) ** 2))
+print(f'rmse_G1: {rmse_G1:.4f}')
+score_G1 = model_G1.score(X_test, y_test)
+print(f'score_G1: {score_G1:.4f} \n')
+
+for name, coef in zip(feature_cols_G1, model_G1.coef_):
+    print(f'{name:12s}: {coef:+.3f}')
 
