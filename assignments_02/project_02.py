@@ -56,6 +56,24 @@ plt.ylabel('Number of Students')
 plt.savefig('outputs/g3_distribution.png')
 plt.show()
 
+print()
 
+print('Task 2: Preprocess the Data')
+# Handle the G3=0 rows first. Filter them out and save the result to a new DataFrame. 
+# Print the shape before and after to confirm how many rows were removed. 
+# Add a comment explaining your reasoning -- why would keeping these rows distort the model?
+
+# Then convert the yes/no columns to 1/0 and the sex column to 0/1.
+
+# Now check something interesting before moving on. 
+# Compute the Pearson correlation between absences and G3 on both the original dataset and 
+# the filtered one, and print both values. The difference is striking. 
+# Add a comment explaining why filtering changes the result: what were students with G3=0 doing in 
+# the original data that made absences look like a weak predictor? 
+# You might want to explore scatter plots to help understand this.
+
+print('df.shape', df.shape)
+df_G3_filtered = df[df['G3'] != 0].copy()
+print('df_G3_filtered', df_G3_filtered.shape)
 
 
