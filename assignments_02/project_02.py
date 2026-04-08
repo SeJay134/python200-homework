@@ -239,7 +239,13 @@ print(f'rmse_q5: {rmse_q5:.4f}')
 score_q5 = model.score(X_test, y_test)
 print(f'score_q5: {score_q5:.4f} \n')
 
+# Split into training and test sets (80/20, random_state=42), fit a LinearRegression model, 
+# and print both train R² and test R², as well as RMSE on the test set. 
+# Compare the test R² to your baseline from Task 4 -- how much does adding more features help?
+# Print each feature name alongside its coefficient:
 
+for name, coef in zip(feature_cols, model.coef_):
+    print(f'{name:12s}: {coef:+.3f}')
 
 
 
