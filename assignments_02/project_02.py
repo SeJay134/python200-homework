@@ -87,6 +87,15 @@ for col in cols:
 print('df_G3_filtered.info')
 df_G3_filtered.info()
 
+print('df_G3_filtered.shape\n', df_G3_filtered.shape)
+print('df_G3_filtered.head(5)\n', df_G3_filtered.head(5))
+print('df_G3_filtered.dtypes\n', df_G3_filtered.dtypes)
+
+df_corr_not_filtered = df['absences'].corr(df['G3'])
+print('df_corr_not_filtered', df_corr_not_filtered)
+df_corr_filtered = df_G3_filtered['absences'].corr(df_G3_filtered['G3'])
+print('df_corr_filtered', df_corr_filtered)
+
 
 
 
