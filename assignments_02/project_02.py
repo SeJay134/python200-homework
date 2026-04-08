@@ -407,3 +407,24 @@ print(f'score_G1: {score_G1:.4f} \n')
 for name, coef in zip(feature_cols_G1, model_G1.coef_):
     print(f'{name:12s}: {coef:+.3f}')
 
+# markdown
+# No, a high R² does not mean that G1 causes G3.
+# G1 is simply an earlier grade, so it is naturally very strongly correlated with the final grade.
+# This is a case of correlation, not causation.
+
+# Yes, the model is useful for prediction once G1 is available, because it achieves a high R² (around 0.8).
+# However, it is not very useful for early intervention, since G1 is already a strong indicator of performance.
+# By the time G1 is known, it may already be late to help struggling students.
+
+# Educators should build models using features that are available before G1, such as:
+# study time
+# past failures
+# absences
+# family and support factors
+
+# G1 is a very strong predictor because it has already been observed earlier in the course. 
+# It reflects the student’s performance at a previous stage, 
+# so it is naturally highly correlated with the final grade (G3). 
+# This is why the model shows much better results — it is using information from 
+# an earlier evaluation of the same learning process, rather than predicting purely 
+# from independent factors.
