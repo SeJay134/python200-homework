@@ -167,3 +167,20 @@ plt.show()
 # Least influential features include freetime, activities, and sex.
 
 print()
+
+print("Task 4: Baseline Model")
+# Build the simplest possible model: use failures alone to predict G3. 
+# Split into training and test sets (80/20, random_state=42), fit a LinearRegression model, 
+# and print the slope, RMSE, and R² on the test set.
+# Add a comment: given that grades are on a 0-20 scale, 
+# what do the slopes and RMSE tell you in plain English? Is R² better or 
+# worse than you expected from exploratory data analysis?
+
+X_q4 = df_G3_filtered[["failures"]]
+y_q4 = df_G3_filtered["G3"]
+
+X_train_q4, X_test_q4, y_train_q4, y_test_q4 = train_test_split(
+    X_q4, y_q4, test_size=0.2, random_state=42
+)
+
+
