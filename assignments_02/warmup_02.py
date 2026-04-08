@@ -39,6 +39,17 @@ print('prediction', prediction[1][0], '\n') # 8 - 101046
 
 # ---------------------------------------------------------------------------------
 
+print('scikit-learn Question 2')
+# scikit-learn requires the feature array X to be 2D even when you only have one feature. 
+# Start with this 1D array:
 
+x = np.array([10, 20, 30, 40, 50]).reshape(-1, 1)
+print(x)
+# Print its shape. Use .reshape() to convert it to a 2D array and print the new shape. 
+# Add a comment explaining, in your own words, why scikit-learn needs X to be 2D.
+
+# it does not work with 1D array
+
+# -----------------------------------------------------------------------------------
 
 
