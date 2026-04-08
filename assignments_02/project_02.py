@@ -176,8 +176,8 @@ print("Task 4: Baseline Model")
 # what do the slopes and RMSE tell you in plain English? Is R² better or 
 # worse than you expected from exploratory data analysis?
 
-X_q4 = df_G3_filtered[["failures"]]
-y_q4 = df_G3_filtered["G3"]
+X_q4 = df_G3_filtered[['failures']]
+y_q4 = df_G3_filtered['G3']
 
 X_train_q4, X_test_q4, y_train_q4, y_test_q4 = train_test_split(
     X_q4, y_q4, test_size=0.2, random_state=42
