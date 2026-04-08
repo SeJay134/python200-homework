@@ -170,8 +170,8 @@ subjects = ["Math", "Science", "English", "History"]
 scores   = [88, 92, 75, 83]
 plt.bar(subjects, scores)
 plt.title("Subject Scores")
-plt.xlabel("label")
-plt.ylabel("label")
+plt.xlabel("School Subjects")   # ---------------------- changed
+plt.ylabel("Test Scores")       # ---------------------- changed
 
 plt.show()
 
@@ -183,8 +183,8 @@ x2, y2 = [1, 2, 3, 4, 5], [5, 4, 3, 2, 1]
 plt.scatter(x1, y1, color="blue", label="datasets_1")
 plt.scatter(x2, y2, color="red", label="datasets_2")
 plt.title("scatter plot")
-plt.xlabel("label")
-plt.ylabel("label")
+plt.xlabel("X Values")  # ---------------------- changed
+plt.ylabel("Y Values")  # ---------------------- changed
 
 plt.show()
 
@@ -336,6 +336,19 @@ if value_p_value > 0.05:
 else:
     print("Reject H0")
 
+print()
+
+# ----------------------------------------------- added
+print("pair test")
+t_stat, p_val = stats.ttest_rel(before, after)
+print(f"t-statistic: {t_stat:.3f}")
+print(f"p-value: {p_val:.6f}")
+
+if p_val > 0.05:
+    print("Fail to reject H0")
+else:
+    print("Reject H0")
+# -------------------------------------------------------
 print()
 
 print("Hypothesis Question 4")
