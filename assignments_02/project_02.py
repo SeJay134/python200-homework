@@ -190,4 +190,10 @@ y_pred_q4 = model_q4.predict(X_test_q4)
 print('Slope_q4:', model_q4.coef_[0])
 print('Intercept_q4:', model_q4.intercept_, '\n')
 
+rmse_q4 = np.sqrt(np.mean((y_pred_q4 - y_test_q4) ** 2))
+print(f'rmse_q4: {rmse_q4:.4f}')
+score_q4 = model_q4.score(X_test_q4, y_test_q4)
+print(f'score_q4: {score_q4:.4f} \n')
+
+
 
