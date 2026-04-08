@@ -183,4 +183,11 @@ X_train_q4, X_test_q4, y_train_q4, y_test_q4 = train_test_split(
     X_q4, y_q4, test_size=0.2, random_state=42
 )
 
+model_q4 = LinearRegression()
+model_q4.fit(X_train_q4, y_train_q4)
+y_pred_q4 = model_q4.predict(X_test_q4)
+
+print('Slope_q4:', model_q4.coef_[0])
+print('Intercept_q4:', model_q4.intercept_, '\n')
+
 
