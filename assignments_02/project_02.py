@@ -79,6 +79,15 @@ print('df_G3_filtered', df_G3_filtered.shape)
 # Students with G3=0 didn't take the final exam.
 # Keeping these rows would distort the model because it would treat missing exams as very low grades.
 
+df_G3_filtered['sex'] = df_G3_filtered['sex'].replace({'F': 0, 'M': 1})
+cols = ['schoolsup', 'internet', 'higher', 'activities']
+for col in cols:
+    df_G3_filtered[col] = df_G3_filtered[col].replace({'yes': 1, 'no': 0})
+
+print('df_G3_filtered.info')
+df_G3_filtered.info()
+
+
 
 
 
