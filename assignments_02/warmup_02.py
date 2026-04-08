@@ -93,7 +93,25 @@ plt.tight_layout()
 plt.show()
 print()
 
+# ---------------------------------------------------------------------------------------------
 
+print('Linear Regression\n')
+# The questions below all use the same synthetic medical costs dataset: 
+# 100 patients, each with an age (20 to 65), a smoker flag (0 = non-smoker, 1 = smoker), 
+# and an annual medical cost as the target. Generate it once and reuse the variables throughout.
+
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+np.random.seed(42)
+num_patients = 100
+age    = np.random.randint(20, 65, num_patients).astype(float)
+smoker = np.random.randint(0, 2, num_patients).astype(float)
+cost   = 200 * age + 15000 * smoker + np.random.normal(0, 3000, num_patients)
+print()
 
 
 
