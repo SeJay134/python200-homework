@@ -212,3 +212,34 @@ print(f'score_q4: {score_q4:.4f} \n')
 
 print()
 
+print('Task 5: Build the Full Model')
+# Now build a regression model using all of the numeric and binary features from 
+# the Feature Guide:
+
+df_clean = df_G3_filtered
+
+feature_cols = ["failures", "Medu", "Fedu", "studytime", "higher", "schoolsup",
+                "internet", "sex", "freetime", "activities", "traveltime"]
+X = df_clean[feature_cols].values
+y = df_clean['G3'].values
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print('Slope_q5:', model.coef_[0])
+print('Intercept_q5:', model.intercept_, '\n')
+
+rmse_q5 = np.sqrt(np.mean((y_pred - y_test) ** 2))
+print(f'rmse_q5: {rmse_q5:.4f}')
+score_q5 = model.score(X_test, y_test)
+print(f'score_q5: {score_q5:.4f} \n')
+
+
+
+
+
