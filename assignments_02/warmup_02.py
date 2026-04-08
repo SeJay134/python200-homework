@@ -52,4 +52,12 @@ print(x)
 
 # -----------------------------------------------------------------------------------
 
+print('scikit-learn Question 3')
+# K-Means is an unsupervised algorithm that follows the same create → fit → predict pattern 
+# as everything else in scikit-learn. Use the code below to generate a synthetic dataset 
+# with three natural clusters:
 
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+import matplotlib.pyplot as plt
+from pathlib import Path
