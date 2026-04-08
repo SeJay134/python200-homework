@@ -61,3 +61,28 @@ from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 from pathlib import Path
+
+# X_clusters, _ = make_blobs(n_samples=120, centers=3, cluster_std=0.8, random_state=7)
+# Create a KMeans model with n_clusters=3 and random_state=42, fit it to X_clusters, 
+# and predict a cluster label for each point. Print the cluster centers (kmeans.cluster_centers_) 
+# and how many points fell into each cluster using np.bincount(labels).
+# Then create a scatter plot coloring each point by its cluster label, plot the cluster centers 
+# as black X's, add a title and axis labels. Save the figure to outputs/kmeans_clusters.png.
+
+X_clusters, _ = make_blobs(n_samples=120, centers=3, cluster_std=0.8, random_state=7)
+
+fig, (ax1) = plt.subplots()
+
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(X_clusters)
+labels = kmeans.predict(X_clusters)
+print(kmeans.cluster_centers_)
+print(np.bincount(labels))
+
+ax1.scatter(X_clusters[:, 0], X_clusters[:, 1], c=labels, cmap='viridis', s=60, alpha=0.7)
+ax1.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='black', marker='x', s=200, linewidths=3)
+ax1.set_title('KMeans model')
+ax1.set_xlabel('X')
+ax1.set_ylabel('Y')
+
+
