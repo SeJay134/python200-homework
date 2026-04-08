@@ -113,5 +113,60 @@ smoker = np.random.randint(0, 2, num_patients).astype(float)
 cost   = 200 * age + 15000 * smoker + np.random.normal(0, 3000, num_patients)
 print()
 
+# ---------------------------------------------------------------------------------------------
+
+print('Linear Regression Question 1')
+# Before fitting anything, look at the data. Create a scatter plot of age on the x-axis and 
+# cost on the y-axis. Color the points by smoker status by passing c=smoker and cmap="coolwarm" 
+# to plt.scatter(). Add a title "Medical Cost vs Age", label both axes, and save 
+# to outputs/cost_vs_age.png.
+# Add a comment describing what you see. Are there two distinct groups visible? 
+# What does that suggest about the smoker variable?
+
+print(age, '\n')
+print(smoker, '\n')
+
+path = Path('outputs/cost_vs_age.png')
+path.parent.mkdir(parents=True, exist_ok=True)
+plt.figure()
+plt.scatter(age, cost, c=smoker, cmap='coolwarm')
+plt.title('Medical Cost vs Age')
+plt.xlabel('age')
+plt.ylabel('cost')
+plt.savefig(path, dpi=300)
+plt.show()
+
+# There are two distinct groups visible. 
+# One group has much higher costs, which likely represents smokers. 
+# This suggests that smoking has a strong impact on medical costs.
+print()
+
+# ------------------------------------------------------------------------------
+
+print('Linear Regression Question 2')
+# Split the data into training and test sets using age as the only feature, an 80/20 split, 
+# and random_state=42. Reshape age to a 2D array before using it as X. 
+# Print the shapes of all four arrays.
+
+age_resh = age.reshape(-1, 1)
+print(age_resh, '\n')
+cost_resh = cost.reshape(-1, 1)
+print('cost_resh', cost_resh, '\n')
+
+X = age_resh
+y = cost_resh
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+print('X_train', X_train, '\n')
+print('X_test', X_test, '\n')
+print('y_test', y_test, '\n')
+print('y_train', y_train, '\n')
+
+# ----------------------------------------------------------------------------------
+
+
 
 
