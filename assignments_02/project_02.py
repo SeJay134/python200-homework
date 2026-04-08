@@ -116,3 +116,24 @@ plt.show()
 
 print()
 
+print('Task 3: Exploratory Data Analysis')
+# Compute the Pearson correlation between each numeric feature and G3 on the filtered dataset, 
+# and print them sorted from most negative to most positive. 
+# Which feature has the strongest relationship with G3? Are any results surprising?
+
+# Then create at least two visualizations of your own choosing and save them to outputs/. 
+# Use your judgment from previous weeks of data engineering to guide your use of plots. 
+# Use the correlation results to guide you -- what relationships seem worth a closer look? 
+# Add a comment for each plot describing what you see.
+
+columns = ['sex', 'age', 'Medu', 'Fedu', 'traveltime', 'studytime', 'failures', 'schoolsup', 'internet', 'higher', 'activities', 'absences', 'freetime', 'goout', 'Walc', 'G1', 'G2']
+corr_columns = []
+
+for col in columns:
+    df_corr_col = df_G3_filtered[col].corr(df_G3_filtered['G3'])
+    corr_columns.append(f'{col}: {df_corr_col}')
+    #print(f"{col}: {df_corr_col}")
+
+corr_columns_sorted = sorted(corr_columns, key=lambda x: float(x.split(': ')[1]))
+for value in corr_columns_sorted:
+    print(value)
