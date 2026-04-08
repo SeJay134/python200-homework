@@ -167,6 +167,31 @@ print('y_train', y_train, '\n')
 
 # ----------------------------------------------------------------------------------
 
+print('Linear Regression Question 3')
+# Fit a LinearRegression model to your training data from Question 2. 
+# Print the slope and intercept. Then predict on the test set and print:
+# RMSE: np.sqrt(np.mean((y_pred - y_test) ** 2))
+# R² on the test set: model.score(X_test, y_test)
+# Add a comment interpreting the slope in plain English -- what does it mean for medical costs?
+
+model_q3 = LinearRegression()
+model_q3.fit(X_train, y_train)
+y_pred = model_q3.predict(X_test)
+
+print('Slope:', model_q3.coef_[0])
+print('Intercept:', model_q3.intercept_, '\n')
+
+rmse_q3 = np.sqrt(np.mean((y_pred - y_test) ** 2))
+print(f'rmse_q3: {rmse_q3:.4f}')
+score_q3 = model_q3.score(X_test, y_test)
+print(f'score_q3: {score_q3:.4f} \n')
+
+# The slope represents the increase in medical cost per additional year of age.
+# A positive slope means that older patients generally have higher medical costs
+
+# ----------------------------------------------------------------------------------
+
+
 
 
 
