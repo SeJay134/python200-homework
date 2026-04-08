@@ -109,5 +109,10 @@ axs[1].set_ylabel('y')
 
 plt.show()
 
+# Students with G3=0 likely didn't take the exam.
+# Many of them have varying numbers of absences, which adds noise.
+# This weakens the correlation between absences and G3 in the original dataset.
+# After removing them, the relationship becomes clearer.
 
+print()
 
