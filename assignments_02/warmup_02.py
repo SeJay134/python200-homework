@@ -85,4 +85,15 @@ ax1.set_title('KMeans model')
 ax1.set_xlabel('X')
 ax1.set_ylabel('Y')
 
+path = Path('outputs/kmeans_clusters.png')
+path.parent.mkdir(parents=True, exist_ok=True)
+
+plt.savefig(path, dpi=300)
+plt.tight_layout()
+plt.show()
+print()
+
+
+
+
 
