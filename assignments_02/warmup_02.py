@@ -218,5 +218,40 @@ print()
 
 # -----------------------------------------------------------------------------------
 
+print('Linear Regression Question 5')
+# A predicted vs actual plot is a standard tool for evaluating regression models. 
+# Each test observation becomes a dot: the model's prediction goes on the x-axis, 
+# the true value goes on the y-axis. A perfect model would place every point on the diagonal line 
+# where predicted equals actual.
+# Using the two-feature model from Linear Regression Question 4, create this plot for the test set. 
+# Add a diagonal reference line, a title "Predicted vs Actual", labeled axes, 
+# and save to outputs/predicted_vs_actual.png.
+# Add a comment: what does it mean when a point falls above the diagonal? What about below?
 
+# trained_model = model_full
+# test_features = X_test_m
+# true_values = y_test_m
+
+predict_q5 = model_full.predict(X_test_m)
+x = predict_q5
+y = y_test_m
+
+line_min_q5 = min(min(predict_q5), min(y_test_m))
+line_max_q5 = max(max(predict_q5), max(y_test_m))
+
+line_x_q5 = np.linspace(line_min_q5, line_max_q5, 100)
+
+path = Path('outputs/predicted_vs_actual.png')
+path.parent.mkdir(parents=True, exist_ok=True)
+plt.figure()
+plt.scatter(x, y, cmap='coolwarm')
+plt.plot(line_x_q5, line_x_q5, color='black', linestyle='--')
+plt.title('Predicted vs Actual')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.savefig(path, dpi=300)
+plt.show()
+
+# Points above the diagonal mean the actual cost is higher than predicted (underestimation).
+# Points below the diagonal mean the predicted cost is higher than actual (overestimation).
 
