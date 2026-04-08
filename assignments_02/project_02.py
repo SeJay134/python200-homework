@@ -247,5 +247,59 @@ print(f'score_q5: {score_q5:.4f} \n')
 for name, coef in zip(feature_cols, model.coef_):
     print(f'{name:12s}: {coef:+.3f}')
 
+# Look carefully at the coefficients. Sort them mentally from largest to smallest. 
+# Are any signs (positive or negative) surprising given what you know about the data? 
+# For any surprising result, add a comment with your best explanation. 
+# Then compare train R² to test R² -- are they close, or is there a gap? 
+# What does that tell you about the model?
+
+# Finally, add a comment answering: if you were deploying this model in production, 
+# which features would you keep and which would you drop? Justify your choices based on what you see 
+# in the numbers.
+# ------------------------------------------------------------------------------------------------
+# markdown
+# Adding more features improved the model performance slightly.
+# R² increased from 0.0895 to 0.1539, meaning the model explains more variance in G3.
+# ------------------------------------------------------------------------------------------------
+# schoolsup -2.062 Students with school support tend to have lower grades
+# internet +0.834 Internet access slightly improves performance
+# activities -0.009 No meaningful effect
+
+# schoolsup (−2.062)
+# This is the most surprising result.
+# Intuitively, school support should improve performance, but the model shows a strong negative effect.
+# A likely explanation is that students who receive support are already struggling, so the variable reflects underlying difficulty rather than causing lower grades.
+
+# internet (+0.834)
+# Slightly positive effect, which makes sense (access to resources), but the effect is not very strong.
+
+# activities (~0)
+# Almost no effect, which suggests extracurricular activities neither help nor harm grades significantly.
+# ------------------------------------------------------------------------------------------------
+# Train R² and Test R² are relatively close (no large gap).
+# This suggests the model is not heavily overfitting.
+# ------------------------------------------------------------------------------------------------
+# If deploying this model in production:
+
+# Keep:
+# failures → strong negative effect
+# studytime → meaningful positive effect
+# higher → clear positive signal
+# internet → useful contextual feature
+
+# Possibly keep:
+# Medu, Fedu → small but consistent positive effects
+
+# Drop:
+# freetime → near zero effect
+# activities → no meaningful contribution
+# traveltime → very weak effect
+
+# Be careful with:
+# schoolsup → strong negative coefficient but misleading (proxy for struggling students)
+# ------------------------------------------------------------------------------------------------
+
+print()
+
 
 
