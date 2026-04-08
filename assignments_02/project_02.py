@@ -137,3 +137,20 @@ for col in columns:
 corr_columns_sorted = sorted(corr_columns, key=lambda x: float(x.split(': ')[1]))
 for value in corr_columns_sorted:
     print(value)
+
+fig, axs = plt.subplots(1, 2, figsize=(12, 8))
+axs[0].scatter(df_G3_filtered['failures'], df_G3_filtered['G3'], alpha=0.5)
+axs[0].set_title('G3 and failures')
+axs[0].set_xlabel('Failures')
+axs[0].set_ylabel('Final Grade (G3)')
+
+axs[1].scatter(df_G3_filtered['schoolsup'], df_G3_filtered['G3'], alpha=0.5)
+axs[1].set_title('G3 and schoolsup')
+axs[1].set_xlabel('School Support (0/1)')
+axs[1].set_ylabel('Final Grade (G3)')
+plt.tight_layout()
+
+plt.savefig('outputs/g3_Failures_School_Support.png')
+plt.show()
+
+
