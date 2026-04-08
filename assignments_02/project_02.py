@@ -301,5 +301,43 @@ for name, coef in zip(feature_cols, model.coef_):
 
 print()
 
+print('Task 6: Evaluate and Summarize')
+# A useful way to evaluate a regression model visually is a predicted vs actual plot. 
+# This is a scatter plot where each point in the test set becomes a dot, with the model's prediction 
+# (y_hat) on the x-axis and the true value (y) on the y-axis. If the model were perfect, 
+# every point would fall exactly on the diagonal (predicted = actual). Clusters or curves away from 
+# the diagonal reveal systematic errors that RMSE alone won't show you. Random scattering around 
+# the diagonal is expected, and acceptable, prediction error.
+# Create this plot for your test set. Add a diagonal reference line (for y=y_predicted), 
+# a title "Predicted vs Actual (Full Model)", labeled axes, and save to outputs/predicted_vs_actual.png. 
+# Add a comment: does the model seem to struggle more at the high end, the low end, 
+# or is error roughly uniform across grade levels? What does a value above or below the diagonal mean?
+# Then write a plain-language summary in your comments statements covering:
 
+# The size of the filtered dataset and the test set
+# The RMSE and R² of your best model in plain language -- on a 0-20 scale, 
+# what does a typical prediction error actually mean?
+# Which two features have the largest positive and largest negative coefficients, 
+# and what those mean
+# One result that surprised you
+
+# ---------------------------------------------------------------
+
+predict_q6 = model.predict(X_test)
+x = predict_q6
+y = y_test
+
+line_min_q6 = min(min(predict_q6), min(y_test))
+line_max_q6 = max(max(predict_q6), max(y_test))
+
+line_x_q6 = np.linspace(line_min_q6, line_max_q6, 100)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(x, y, alpha=0.5)
+plt.plot(line_x_q6, line_x_q6, color='black', linestyle='--')
+plt.title('Predicted vs Actual (Full Model)')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.savefig('outputs/predicted_vs_actual.png', dpi=300)
+plt.show()
 
