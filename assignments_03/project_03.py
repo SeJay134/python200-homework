@@ -399,3 +399,25 @@ print(f"Std RandomForest scaled:  {cv_scores_clf_task3.std():.3f}")
 
 # Scaling is not necessary for tree-based models, but was kept for consistency
 
+# Logistic Regression
+cv_scores_log_reg_1 = cross_val_score(log_reg_1, X_train_scaled, y_train, cv=5)
+print(cv_scores_log_reg_1)
+print(f"Mean LogisticRegression scaled: {cv_scores_log_reg_1.mean():.3f}")
+print(f"Std LogisticRegression scaled:  {cv_scores_log_reg_1.std():.3f}")
+
+cv_scores_log_reg_2 = cross_val_score(log_reg_2, X_train_pca, y_train, cv=5)
+print(cv_scores_log_reg_2)
+print(f"Mean LogisticRegression PCA: {cv_scores_log_reg_2.mean():.3f}")
+print(f"Std LogisticRegression PCA:  {cv_scores_log_reg_2.std():.3f}")
+
+# Logistic Regression performs well on both scaled and PCA-transformed data. 
+# The scaled version slightly outperforms PCA, suggesting that dimensionality reduction 
+# removes some useful variance. Overall, Logistic Regression is stable across folds with 
+# low variance, indicating good generalization.
+
+# The ranking from cross-validation is consistent with the single train/test split results. 
+# Random Forest remains the best-performing model overall, followed closely by Logistic Regression. 
+# KNN significantly improves after feature scaling, confirming its sensitivity to feature magnitude. 
+# Decision Trees show higher variance across folds, especially for deeper trees, indicating overfitting tendencies. 
+# PCA slightly reduces accuracy but improves stability in some cases, particularly for Logistic Regression.
+
