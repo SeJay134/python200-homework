@@ -268,3 +268,39 @@ plt.show()
 n_components_80 = np.argmax(perc_exp_vals >= 0.80) + 1 # returns index of first value >= 0.80
 print("Components needed for 80% variance:", n_components_80)
 # Approximately 15–20 components are needed to explain around 80% of the variance.
+
+print('PCA Question 4')
+
+def reconstruct_digit(sample_idx, scores, pca, n_components):
+    """Reconstruct one digit using the first n_components principal components."""
+    reconstruction = pca.mean_.copy()
+    for i in range(n_components):
+        reconstruction = reconstruction + scores[sample_idx, i] * pca.components_[i]
+    return reconstruction.reshape(8, 8)
+
+# Add a comment: at what n do the digits become clearly recognizable, 
+# and does that match where the variance curve levels off?
+
+n_val = [2, 5, 15, 40]
+fig, axes = plt.subplots(5, 5, figsize=(10, 10), squeeze=False)
+
+# Original
+for col in range(5):
+    axes[0, col].imshow(images[col], cmap="gray_r")
+    axes[0, col].set_title(f'Digit {col}')
+    axes[0, col].axis('off')
+
+# Reconstruction
+for row, n in enumerate(n_val, start=1):
+    for col in range(5):
+        rec = reconstruct_digit(col, scores, pca, n)
+        axes[row, col].imshow(rec, cmap="gray_r")
+        axes[row, col].set_title(f'n={n}')
+        axes[row, col].axis('off')
+
+plt.tight_layout()
+plt.savefig('outputs/pca_reconstructions.png')
+plt.show()
+
+# Digits become clearly recognizable around n ≈ 15.
+# This matches the PCA variance plot where the curve begins to level off.
