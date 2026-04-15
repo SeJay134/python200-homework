@@ -278,3 +278,40 @@ plt.title("Best model Confusion Matrix")
 plt.savefig('outputs/best_model_confusion_matrix.png')
 plt.show()
 
+# Logistic Regression trained on scaled data performs best, achieving the highest 
+# accuracy of 0.93. It also maintains a strong balance between precision and recall 
+# for both classes.
+
+# KNN performed poorly on unscaled data (0.80 accuracy) but improved significantly 
+# after scaling (~0.91), showing that it is sensitive to feature scale.
+# Decision Trees improved as depth increased, but deeper trees showed signs of overfitting.
+# Random Forest outperformed a single Decision Tree (0.92 accuracy), demonstrating 
+# the benefit of ensemble methods.
+# Logistic Regression achieved the best overall performance, especially on scaled data.
+
+# Models trained on the full scaled data generally performed slightly better than those using 
+# PCA-reduced data.
+# PCA reduced dimensionality but caused a small drop in performance due to information loss.
+# However, the difference was small, indicating that PCA still retained most of 
+# the important structure in the data.
+
+# Models like KNN and Logistic Regression, which depend on feature magnitudes, benefited from scaling and showed slight performance changes with PCA.
+# Tree-based models (Decision Tree and Random Forest) were less affected by scaling and dimensionality reduction.
+
+# As tree depth increases, training accuracy improves, but test performance eventually 
+# plateaus or slightly decreases.
+# This indicates overfitting, where the model memorizes training data but generalizes 
+# less effectively.
+
+# Accuracy is useful, but not sufficient for spam detection.
+# It is more important to minimize false positives (legitimate emails marked as spam), 
+# since this can negatively impact users.
+# Therefore, precision for the spam class is especially important.
+
+# The best model (Logistic Regression) produces slightly more false negatives than false positives.
+# This means some spam emails are not detected, but fewer legitimate emails are incorrectly marked as spam.
+
+# The confusion matrix shows that the model makes slightly more false negatives than false 
+# positives. This means some spam emails are not detected, but fewer legitimate emails 
+# are incorrectly classified as spam. Since false positives are more harmful in a spam filter, 
+# this is a reasonable trade-off.
