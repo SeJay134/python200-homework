@@ -109,3 +109,23 @@ for k in k_values:
 
 print()
 
+print('Classifier Evaluation Question 1')
+# Add a comment: which pair of species does the model most often confuse (if any)?
+
+cm = confusion_matrix(y_test, preds)
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=iris.target_names
+)
+
+disp.plot()
+plt.title("KNN Confusion Matrix (Iris)")
+plt.savefig('outputs/knn_confusion_matrix.png')
+plt.show()
+
+# The model most often confuses versicolor and virginica. 
+# These two classes have more similar feature values, especially in petal measurements, 
+# making them harder to distinguish. In contrast, setosa is almost always classified 
+# correctly because it is well separated from the other two classes.
+
+print()
