@@ -206,3 +206,31 @@ print()
 # Scaling significantly improves performance. 
 # PCA slightly reduces performance compared to scaled data but reduces dimensionality 
 # while maintaining reasonable accuracy.
+
+# 3, 5, 10, and None
+model_dtc3 = DecisionTreeClassifier(max_depth=3, random_state=42)
+model_dtc3.fit(X_train, y_train)
+preds3 = model_dtc3.predict(X_test)
+print("Accuracy_dtc3:", accuracy_score(y_test, preds3))
+print('max_depth 3', classification_report(y_test, preds3))
+
+model_dtc5 = DecisionTreeClassifier(max_depth=5, random_state=42)
+model_dtc5.fit(X_train, y_train)
+preds5 = model_dtc5.predict(X_test)
+print("Accuracy_dtc5:", accuracy_score(y_test, preds5))
+print('max_depth 5', classification_report(y_test, preds5))
+
+model_dtc10 = DecisionTreeClassifier(max_depth=10, random_state=42)
+model_dtc10.fit(X_train, y_train)
+preds10 = model_dtc10.predict(X_test)
+print("Accuracy_dtc10:", accuracy_score(y_test, preds10))
+print('max_depth 10', classification_report(y_test, preds10))
+
+model_dtc_none = DecisionTreeClassifier(max_depth=None, random_state=42)
+model_dtc_none.fit(X_train, y_train)
+preds_none = model_dtc_none.predict(X_test)
+print("Accuracy_dtc_none:", accuracy_score(y_test, preds_none))
+print('max_depth none', classification_report(y_test, preds_none))
+
+# As tree depth increases, training accuracy increases but test accuracy eventually decreases, 
+# indicating overfitting.
