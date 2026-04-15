@@ -421,3 +421,16 @@ print(f"Std LogisticRegression PCA:  {cv_scores_log_reg_2.std():.3f}")
 # Decision Trees show higher variance across folds, especially for deeper trees, indicating overfitting tendencies. 
 # PCA slightly reduces accuracy but improves stability in some cases, particularly for Logistic Regression.
 
+print('Task 5: Building a Prediction Pipeline')
+# Comment on your pipelines: do they have the same structure? Why or why not? What is 
+# the practical value of packaging a model this way, especially when handing it off 
+# to someone else or deploying it?
+
+# pipeline 1
+r_forest_pipeline = Pipeline([
+    ("classifier", RandomForestClassifier(n_estimators=100, max_depth=6, random_state=0))
+])
+r_forest_pipeline.fit(X_train, y_train)
+pred_r_forest_pipeline = r_forest_pipeline.predict(X_test)
+print(classification_report(y_test, pred_r_forest_pipeline))
+
