@@ -315,3 +315,26 @@ plt.show()
 # positives. This means some spam emails are not detected, but fewer legitimate emails 
 # are incorrectly classified as spam. Since false positives are more harmful in a spam filter, 
 # this is a reasonable trade-off.
+
+imp_clf_task3 = clf_task3.feature_importances_
+feature_names = X.columns
+
+forest_imp_clf_task3 = pd.Series(imp_clf_task3, index=feature_names).sort_values(ascending=False)
+forest_imp_clf_task3 = forest_imp_clf_task3.head(10)
+
+fig, ax = plt.subplots()
+forest_imp_clf_task3.plot.bar(ax=ax)
+ax.set_title("Feature importances")
+ax.set_ylabel("Importance")
+fig.tight_layout()
+plt.savefig('outputs/feature_importances.png')
+plt.show()
+
+# Both Decision Tree and Random Forest identify similar important features, 
+# though the rankings may differ slightly. Random Forest provides more stable and 
+# reliable importance estimates.
+
+# The results match intuition. Features related to spam keywords 
+# (such as "free", "money") and special characters like "!" or "$" are among the most important, 
+# which aligns with how spam emails are typically structured.
+
