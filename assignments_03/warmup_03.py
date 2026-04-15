@@ -199,3 +199,32 @@ digits = load_digits()
 X_digits = digits.data    # 1797 images, each flattened to 64 pixel values
 y_digits = digits.target  # digit labels 0-9
 images   = digits.images  # same data shaped as 8x8 images for plotting
+
+print('PCA Question 1')
+
+X_digits_shape = X_digits.shape
+print('X_digits.shape', X_digits_shape)
+print('X_digits\n', X_digits)
+print()
+images_shape = images.shape
+print('images.shape', images_shape)
+print('images\n', images)
+print()
+
+data = {}
+for i in range(len(y_digits)):
+    dig = y_digits[i]
+    if dig not in data:
+        data[dig] = i
+    if len(data)  == 10:
+        break
+print(data)
+
+fig, ax = plt.subplots(1, 10, figsize=(8, 2))
+for i in range(10):
+    ax[i].imshow(images[data[i]], cmap="gray_r")
+    ax[i].set_title(str(i))
+    ax[i].axis("off")
+plt.savefig('outputs/sample_digits.png')
+plt.show()
+
