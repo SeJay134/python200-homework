@@ -251,3 +251,19 @@ print('RandomForest (PCA)', classification_report(y_test, preds_clf_task3_pca))
 # Random Forest performed strongly on both scaled and PCA-reduced data. 
 # Scaling had little effect, while PCA slightly reduced performance due to loss of feature detail. 
 # However, PCA still preserved most predictive power while reducing dimensionality.
+
+log_reg_1 = LogisticRegression(C=1.0, max_iter=1000, solver='liblinear')
+log_reg_1.fit(X_train_scaled, y_train)
+data_log_reg_1 = np.abs(log_reg_1.coef_).sum()
+preds_clf_task3_log_reg_1 = log_reg_1.predict(X_test_scaled)
+print("Accuracy_log_reg_1_scaled:", accuracy_score(y_test, preds_clf_task3_log_reg_1))
+print('Log regretion (scaled)', classification_report(y_test, preds_clf_task3_log_reg_1))
+print()
+
+log_reg_2 = LogisticRegression(C=1.0, max_iter=1000, solver='liblinear')
+log_reg_2.fit(X_train_pca, y_train)
+preds_clf_task3_log_reg_2 = log_reg_2.predict(X_test_pca)
+print("Accuracy_log_reg_2_pca:", accuracy_score(y_test, preds_clf_task3_log_reg_2))
+print('Log regretion (PCA)', classification_report(y_test, preds_clf_task3_log_reg_2))
+print()
+
