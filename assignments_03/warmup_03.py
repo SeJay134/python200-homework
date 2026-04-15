@@ -192,3 +192,10 @@ print()
 # As C increases, the total magnitude of the coefficients increases. 
 # This happens because higher C reduces regularization, allowing the model to assign larger weights to features. 
 # This means the model becomes more flexible but also more prone to overfitting.
+
+print('PCA')
+
+digits = load_digits()
+X_digits = digits.data    # 1797 images, each flattened to 64 pixel values
+y_digits = digits.target  # digit labels 0-9
+images   = digits.images  # same data shaped as 8x8 images for plotting
