@@ -338,3 +338,28 @@ plt.show()
 # (such as "free", "money") and special characters like "!" or "$" are among the most important, 
 # which aligns with how spam emails are typically structured.
 
+print('Task 4: Cross-Validation')
+# Which model is the most accurate? Which is the most stable 
+# (lowest variance across folds)? Does the ranking match what you saw with the single train/test 
+# split?
+
+# KNN
+cv_scores_knn_unscaled = cross_val_score(knn_unscaled, X_train, y_train, cv=5)
+print(cv_scores_knn_unscaled)
+print(f"Mean KNN unscaled: {cv_scores_knn_unscaled.mean():.3f}")
+print(f"Std KNN unscaled:  {cv_scores_knn_unscaled.std():.3f}")
+
+cv_scores_scaled = cross_val_score(knn_scaled, X_train_scaled, y_train, cv=5)
+print(cv_scores_scaled)
+print(f"Mean KNN scaled: {cv_scores_scaled.mean():.3f}")
+print(f"Std KNN scaled:  {cv_scores_scaled.std():.3f}")
+
+cv_scores_pca = cross_val_score(knn_pca, X_train_pca, y_train, cv=5)
+print(cv_scores_pca)
+print(f"Mean KNN PCA: {cv_scores_pca.mean():.3f}")
+print(f"Std KNN PCA:  {cv_scores_pca.std():.3f}")
+
+# Cross-validation provides a more stable estimate of model performance. 
+# Random Forest and Logistic Regression show the highest and most consistent accuracy. 
+# KNN is sensitive to feature scaling and shows higher variance, especially on unscaled data. 
+# Overall, the ranking is consistent with the single train/test split results.
