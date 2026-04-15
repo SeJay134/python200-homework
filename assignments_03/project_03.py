@@ -54,3 +54,21 @@ except Exception as e:
     print(f"Unexpected error: {e}")
 
 print(df.shape) # (4601, 58)
+
+col_names = []
+with open(path_col_names) as f:
+    for i in f:
+        i = i.strip()
+        if ':' in i and not i.startswith('|'):
+            name_of_col = i.split(':')[0]
+            col_names.append(name_of_col)
+print(len(col_names)) # 57
+# print(col_names)
+
+col_names.append('spam') # col N58
+df.columns = col_names
+
+print(len(col_names))   # 58
+# print(df.columns)
+print(df.head())
+
