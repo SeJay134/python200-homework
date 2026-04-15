@@ -129,3 +129,23 @@ plt.show()
 # correctly because it is well separated from the other two classes.
 
 print()
+
+print('Decision Trees Question 1') 
+# Add a comment comparing the Decision Tree accuracy to KNN. Then add a second comment: 
+# given that Decision Trees don't rely on distance calculations, would scaled vs. 
+# unscaled data affect the result?
+
+model_dtc = DecisionTreeClassifier(max_depth=3, random_state=42)
+model_dtc.fit(X_train, y_train)
+preds = model_dtc.predict(X_test)
+
+print("Accuracy_dtq1:", accuracy_score(y_test, preds))
+print(classification_report(y_test, preds))
+
+# The Decision Tree achieves similar (or slightly lower) accuracy compared to KNN. 
+# While KNN relies on distance between points, the Decision Tree creates rule-based splits, 
+# which may not capture the same fine-grained structure in the data.
+
+# Scaling does not significantly affect Decision Trees because they do not rely 
+# on distance calculations. Instead, they split data based on feature thresholds, 
+# so the relative scale of features does not impact the model's decisions.
