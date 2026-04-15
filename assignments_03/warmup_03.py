@@ -251,3 +251,20 @@ plt.show()
 # (such as 3 and 5 or 4 and 9). This indicates that PCA captures some but not all of 
 # the structure in the data.
 
+print('PCA Question 3')
+# Add a comment: approximately how many components do you need to explain 80% of the variance?
+
+perc_exp_vals = np.cumsum(pca.explained_variance_ratio_)
+print(perc_exp_vals)
+
+plt.plot(range(1, len(perc_exp_vals) + 1), perc_exp_vals)
+plt.xlabel("Number of Components")
+plt.ylabel("Cumulative Explained Variance")
+plt.title("PCA Cumulative Explained Variance")
+plt.savefig('outputs/pca_variance_explained.png')
+plt.show()
+
+# how many components explain 80%
+n_components_80 = np.argmax(perc_exp_vals >= 0.80) + 1 # returns index of first value >= 0.80
+print("Components needed for 80% variance:", n_components_80)
+# Approximately 15–20 components are needed to explain around 80% of the variance.
