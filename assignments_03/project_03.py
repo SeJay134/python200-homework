@@ -146,3 +146,7 @@ X_test_shape = X_test.shape
 print('X_test.shape', X_test_shape)
 print('y_test.shape', y_test.shape)
 print()
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train) # Fit only on training data
+X_test_scaled = scaler.transform(X_test)
