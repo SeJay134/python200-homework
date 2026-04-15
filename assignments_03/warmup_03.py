@@ -37,3 +37,14 @@ print('X_test.shape', X_test_shape)
 print('y_test.shape', y_test.shape)
 print()
 
+print('Preprocessing Question 2')
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+print('X_train_scaled.mean()', X_train_scaled.mean(axis=0))
+
+# The means of all columns in X_train_scaled are very close to 0, 
+# confirming that the StandardScaler has correctly centered the data. 
+# Small deviations from zero are due to floating-point precision and are expected.
