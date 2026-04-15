@@ -77,3 +77,17 @@ print(classification_report(y_test, preds_q2))
 # Scaling ensures that all features contribute equally to the distance calculation
 
 print()
+
+print('KNN Question 3')
+# Add a comment: is this result more or less trustworthy than a single train/test split, and why?
+
+cv_scores = cross_val_score(knn, X_train, y_train, cv=5)
+
+print(cv_scores)
+print(f"Mean: {cv_scores.mean():.3f}")
+print(f"Std:  {cv_scores.std():.3f}")
+
+# This result is more trustworthy than a single train/test split 
+# because it evaluates the model across multiple different splits of the data.
+
+print()
