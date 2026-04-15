@@ -91,3 +91,21 @@ print(f"Std:  {cv_scores.std():.3f}")
 # because it evaluates the model across multiple different splits of the data.
 
 print()
+
+print('KNN Question 4')
+# Add a comment identifying which k you would choose and why.
+
+k_values = [1, 3, 5, 7, 9, 11, 13, 15]
+
+for k in k_values:
+    knn_q4 = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn_q4, X_train, y_train, cv=5)
+    print(f"k={k:2d}:  mean={scores.mean():.3f}  std={scores.std():.3f}")
+
+# I chose k = 7 because it provides a high mean cross-validation accuracy while maintaining 
+# a relatively low standard deviation. This indicates that the model performs well 
+# on average and is stable across different folds. A good choice of k balances accuracy 
+# and consistency, avoiding both overfitting (small k) and underfitting (large k).
+
+print()
+
