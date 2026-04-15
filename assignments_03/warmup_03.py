@@ -60,3 +60,20 @@ preds = knn.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, preds))
 print(classification_report(y_test, preds))
 print()
+
+print('KNN Question 2')
+# Add a comment: does scaling improve performance, hurt it, 
+# or make no difference? Why might that be for this particular dataset?
+
+knn_q2 = KNeighborsClassifier(n_neighbors=5)
+knn_q2.fit(X_train_scaled, y_train)
+
+preds_q2 = knn_q2.predict(X_test_scaled)
+
+print("Accuracy_q2:", accuracy_score(y_test, preds_q2))
+print(classification_report(y_test, preds_q2))
+
+# Scaling slightly improves performance. 
+# Scaling ensures that all features contribute equally to the distance calculation
+
+print()
