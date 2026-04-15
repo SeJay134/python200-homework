@@ -149,3 +149,46 @@ print(classification_report(y_test, preds))
 # Scaling does not significantly affect Decision Trees because they do not rely 
 # on distance calculations. Instead, they split data based on feature thresholds, 
 # so the relative scale of features does not impact the model's decisions.
+
+# Logistic Regression and Regularization
+print('Logistic Regression Question 1')
+# Add a comment: what happens to the total coefficient magnitude as C increases? 
+# What does this tell you about what regularization is doing?
+
+log_reg_1 = LogisticRegression(
+    C=0.01,
+    max_iter=1000,
+    solver="lbfgs"
+)
+log_reg_1.fit(X_train_scaled, y_train)
+data_log_reg_1 = np.abs(log_reg_1.coef_).sum()
+print(f'Value C=0.01: {data_log_reg_1:.4f} underfitting')
+print()
+# Smaller C → stronger regularization → smaller coefficients (potential underfitting)
+
+log_reg_2 = LogisticRegression(
+    C=1.0,
+    max_iter=1000,
+    solver="lbfgs"
+)
+log_reg_2.fit(X_train_scaled, y_train)
+data_log_reg_2 = np.abs(log_reg_2.coef_).sum()
+print(f'Value C=1.0: {data_log_reg_2:.4f} balance')
+print()
+
+log_reg_3 = LogisticRegression(
+    C=100,
+    max_iter=1000,
+    solver="lbfgs"
+)
+log_reg_3.fit(X_train_scaled, y_train)
+data_log_reg_3 = np.abs(log_reg_3.coef_).sum()
+print(f'Value C=100: {data_log_reg_3:.4f} overfitting')
+print()
+
+# ValueError: The 'liblinear' solver does not support multiclass classification (n_classes >= 3). 
+# Either use another solver or wrap the estimator in a OneVsRestClassifier to keep applying a one-versus-rest scheme.
+
+# As C increases, the total magnitude of the coefficients increases. 
+# This happens because higher C reduces regularization, allowing the model to assign larger weights to features. 
+# This means the model becomes more flexible but also more prone to overfitting.
