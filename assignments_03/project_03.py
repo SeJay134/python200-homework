@@ -363,3 +363,30 @@ print(f"Std KNN PCA:  {cv_scores_pca.std():.3f}")
 # Random Forest and Logistic Regression show the highest and most consistent accuracy. 
 # KNN is sensitive to feature scaling and shows higher variance, especially on unscaled data. 
 # Overall, the ranking is consistent with the single train/test split results.
+
+# Decision Tree
+cv_scores_dtc_none = cross_val_score(model_dtc_none, X_train, y_train, cv=5)
+print(cv_scores_dtc_none)
+print(f"Mean Decision Tree None: {cv_scores_dtc_none.mean():.3f}")
+print(f"Std Decision Tree None:  {cv_scores_dtc_none.std():.3f}")
+
+cv_scores_dtc3 = cross_val_score(model_dtc3, X_train, y_train, cv=5)
+print(cv_scores_dtc3)
+print(f"Mean Decision Tree 3: {cv_scores_dtc3.mean():.3f}")
+print(f"Std Decision Tree 3:  {cv_scores_dtc3.std():.3f}")
+
+cv_scores_dtc5 = cross_val_score(model_dtc5, X_train, y_train, cv=5)
+print(cv_scores_dtc5)
+print(f"Mean Decision Tree 5: {cv_scores_dtc5.mean():.3f}")
+print(f"Std Decision Tree 5:  {cv_scores_dtc5.std():.3f}")
+
+cv_scores_dtc10 = cross_val_score(model_dtc10, X_train, y_train, cv=5)
+print(cv_scores_dtc10)
+print(f"Mean Decision Tree 10: {cv_scores_dtc10.mean():.3f}")
+print(f"Std Decision Tree 10:  {cv_scores_dtc10.std():.3f}")
+
+# The Decision Tree with no depth limit shows relatively high variance across folds, 
+# indicating sensitivity to data splits. While it can achieve strong performance, 
+# it is less stable than ensemble methods like Random Forest.
+# Based on the results, max_depth=10 provides the best balance between performance and stability 
+# and is selected as the final model.
