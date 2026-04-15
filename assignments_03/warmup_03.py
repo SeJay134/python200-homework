@@ -21,3 +21,8 @@ from sklearn.metrics import (
 from sklearn.inspection import DecisionBoundaryDisplay
 
 warnings.filterwarnings("ignore", category=RuntimeWarning)
+
+iris = load_iris(as_frame=True)
+X = iris.data
+y = iris.target
+
