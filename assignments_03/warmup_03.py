@@ -228,3 +228,26 @@ for i in range(10):
 plt.savefig('outputs/sample_digits.png')
 plt.show()
 
+print('PCA Question 2')
+
+# Add a comment: do same-digit images tend to cluster together in this 2D space?
+
+pca = PCA()
+pca.fit(X_digits)
+
+scores = pca.transform(X_digits)
+print(scores.shape)
+
+scatter = plt.scatter(scores[:, 0], scores[:, 1], c=y_digits, cmap='tab10', s=10)  # c = color array
+plt.colorbar(scatter, label='Digit')
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("PCA 2D projection of digits")
+plt.savefig('outputs/pca_2d_projection.png')
+plt.show()
+
+# Same-digit images tend to form visible clusters in the 2D PCA space. However, 
+# the clusters are not perfectly separated, and some overlap exists between similar digits 
+# (such as 3 and 5 or 4 and 9). This indicates that PCA captures some but not all of 
+# the structure in the data.
+
