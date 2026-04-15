@@ -48,3 +48,15 @@ print('X_train_scaled.mean()', X_train_scaled.mean(axis=0))
 # The means of all columns in X_train_scaled are very close to 0, 
 # confirming that the StandardScaler has correctly centered the data. 
 # Small deviations from zero are due to floating-point precision and are expected.
+
+# KNN
+print('KNN Question 1')
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+
+preds = knn.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, preds))
+print(classification_report(y_test, preds))
+print()
