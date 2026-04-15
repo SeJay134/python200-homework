@@ -170,3 +170,39 @@ print("Components needed for 90% variance:", n_components_90)
 X_train_pca = pca.transform(X_train_scaled)[:, :n_components_90]
 X_test_pca  = pca.transform(X_test_scaled)[:, :n_components_90]
 
+print('Task 3: A Classifier Comparison')
+# After you have results for all your classifiers, write a comment summarizing what you see. 
+# Which model performs best? For the classifiers where you compared PCA vs. non-PCA, 
+# which worked better -- and does that match your hypothesis from Task 2? 
+# For a spam filter specifically, is accuracy the right metric to optimize -- or would you 
+# rather minimize false positives (legitimate email marked as spam) or 
+# false negatives (spam that gets through)? Take a position and defend it.
+
+# Given the costs described above, 
+# which type of error does your best model make more often?
+
+knn_unscaled = KNeighborsClassifier(n_neighbors=5)
+knn_unscaled.fit(X_train, y_train)
+preds_unscaled = knn_unscaled.predict(X_test)
+print("Accuracy, unscaled:", accuracy_score(y_test, preds_unscaled))
+print(classification_report(y_test, preds_unscaled))
+print()
+
+knn_scaled = KNeighborsClassifier(n_neighbors=5)
+knn_scaled.fit(X_train_scaled, y_train)
+preds_scaled = knn_scaled.predict(X_test_scaled)
+print("Accuracy, scaled:", accuracy_score(y_test, preds_scaled))
+print(classification_report(y_test, preds_scaled))
+print()
+
+knn_pca = KNeighborsClassifier(n_neighbors=5)
+knn_pca.fit(X_train_pca, y_train)
+preds_pca = knn_pca.predict(X_test_pca)
+print("Accuracy, pca:", accuracy_score(y_test, preds_pca))
+print(classification_report(y_test, preds_pca))
+print()
+
+# KNN performs poorly on unscaled data due to differences in feature scales. 
+# Scaling significantly improves performance. 
+# PCA slightly reduces performance compared to scaled data but reduces dimensionality 
+# while maintaining reasonable accuracy.
