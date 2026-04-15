@@ -72,6 +72,9 @@ print(len(col_names))   # 58
 # print(df.columns)
 print(df.head())
 
+spam = df[df['spam'] == 1]
+ham = df[df['spam'] == 0]
+
 plt.boxplot([ham['word_freq_free'], spam['word_freq_free']], labels=['ham', 'spam'])
 plt.title('word_freq_free: ham vs spam')
 plt.ylabel('Frequency')
