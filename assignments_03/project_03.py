@@ -267,3 +267,14 @@ print("Accuracy_log_reg_2_pca:", accuracy_score(y_test, preds_clf_task3_log_reg_
 print('Log regretion (PCA)', classification_report(y_test, preds_clf_task3_log_reg_2))
 print()
 
+cm = confusion_matrix(y_test, preds_clf_task3_log_reg_1)
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=['ham', 'spam']
+)
+
+disp.plot()
+plt.title("Best model Confusion Matrix")
+plt.savefig('outputs/best_model_confusion_matrix.png')
+plt.show()
+
