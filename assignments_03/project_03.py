@@ -164,3 +164,6 @@ plt.grid(True)
 plt.savefig('outputs/pca_variance_explained_task2.png')
 plt.show()
 
+n_components_90 = np.argmax(perc_exp_vals >= 0.90) + 1
+print("Components needed for 90% variance:", n_components_90)
+
