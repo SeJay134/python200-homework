@@ -167,3 +167,6 @@ plt.show()
 n_components_90 = np.argmax(perc_exp_vals >= 0.90) + 1
 print("Components needed for 90% variance:", n_components_90)
 
+X_train_pca = pca.transform(X_train_scaled)[:, :n_components_90]
+X_test_pca  = pca.transform(X_test_scaled)[:, :n_components_90]
+
