@@ -390,3 +390,12 @@ print(f"Std Decision Tree 10:  {cv_scores_dtc10.std():.3f}")
 # it is less stable than ensemble methods like Random Forest.
 # Based on the results, max_depth=10 provides the best balance between performance and stability 
 # and is selected as the final model.
+
+# Random Forest
+cv_scores_clf_task3 = cross_val_score(clf_task3, X_train, y_train, cv=5)
+print(cv_scores_clf_task3)
+print(f"Mean RandomForest scaled: {cv_scores_clf_task3.mean():.3f}")
+print(f"Std RandomForest scaled:  {cv_scores_clf_task3.std():.3f}")
+
+# Scaling is not necessary for tree-based models, but was kept for consistency
+
