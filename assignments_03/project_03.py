@@ -150,3 +150,17 @@ print()
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train) # Fit only on training data
 X_test_scaled = scaler.transform(X_test)
+
+pca = PCA()
+pca.fit(X_train_scaled)
+perc_exp_vals = np.cumsum(pca.explained_variance_ratio_)
+
+plt.plot(range(1, len(perc_exp_vals) + 1), perc_exp_vals)
+plt.xlabel("Number of Components")
+plt.ylabel("Cumulative Explained Variance")
+plt.title("PCA Cumulative Explained Variance")
+plt.axhline(y=0.90, color='r', linestyle='--')
+plt.grid(True)
+plt.savefig('outputs/pca_variance_explained_task2.png')
+plt.show()
+
