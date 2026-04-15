@@ -95,3 +95,38 @@ plt.title('capital_run_length_total')
 plt.savefig('outputs/capital_run_length_total.png')
 plt.close()
 plt.show()
+
+# The dataset contains 4601 emails.
+
+# There are 58 columns in total:
+# 57 input features
+# 1 target variable (spam)
+
+# The dataset is moderately imbalanced:
+# About 39% spam emails
+# About 61% ham (non-spam) emails
+
+# The dataset is imbalanced, accuracy alone can be misleading.
+# A simple model that always predicts “ham” would still achieve around 60% accuracy, even though it has no real predictive power.
+# Therefore, metrics like precision, recall, and F1-score are more meaningful than raw accuracy.
+
+# word_freq_free: Spam emails generally have higher values, while ham emails are mostly near zero.
+# char_freq_!: Spam emails contain more exclamation marks and have higher variability.
+# capital_run_length_total: Spam emails tend to have much larger values, indicating more use of capital letters.
+# Overall, spam and ham show clear but not perfectly separated distributions.
+
+# The differences are noticeable and significant, but not perfectly separated.
+# No single feature fully distinguishes spam from ham, but some features clearly show strong patterns.
+
+# It indicates that most emails do not contain many of the tracked words or symbols.
+# This makes the dataset sparse, which is typical for text-based features where most word frequencies are zero.
+
+# Different features measure different things:
+# Word frequency features are small fractions (0–1 range)
+# Capital run length features can reach large values (hundreds or thousands)
+# This creates a large difference in scale across features.
+
+# Many models (such as Logistic Regression, KNN, and SVM) are sensitive to feature scaling.
+# If features are not normalized, large-scale features (like capital run length) may dominate smaller ones.
+# Therefore, feature scaling is important before training models.
+
