@@ -4,17 +4,18 @@ from openai import OpenAI
 load_dotenv()
 client = OpenAI()
 
-def control_mode(messages, t):
+def control_mode(messages, t, n):
         response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
-        temperature=t
+        temperature=t,
+        n=n
     )
         return response
 
 print('API Question 1\n')
 messages=[{"role": "user", "content": "What is one thing that makes Python a good language for beginners?"}]
-response = control_mode(messages, 1.0)
+response = control_mode(messages, 1.0, n=1)
 print('message content:', response.choices[0].message.content)
 print('model:', response.model)
 print('total tokens:', response.usage.total_tokens)
@@ -25,15 +26,15 @@ prompt = "Suggest a creative name for a data engineering consultancy."
 temperatures = [0, 0.7, 1.5]
 
 messages=[{"role": "user", "content": prompt}]
-response = control_mode(messages, temperatures[0])
+response = control_mode(messages, temperatures[0], n=1)
 print('temp 0:\n', response.choices[0].message.content)
 print()
 messages=[{"role": "user", "content": prompt}]
-response = control_mode(messages, temperatures[1])
+response = control_mode(messages, temperatures[1], n=1)
 print('temp 0.7:\n', response.choices[0].message.content)
 print()
 messages=[{"role": "user", "content": prompt}]
-response = control_mode(messages, temperatures[2])
+response = control_mode(messages, temperatures[2], n=1)
 print('temp 1.5:\n', response.choices[0].message.content)
 print()
 
@@ -42,3 +43,10 @@ print()
 # At temperature 1.5, the output becomes highly creative and varied, but less predictable and sometimes inconsistent.
 #
 # If I needed a consistent, reproducible output, I would use temperature = 0.
+
+print('API Question 3')
+prompt = "Give me a one-sentence fun fact about pandas (the animal, not the library)."
+messages=[{"role": "user", "content": prompt}]
+response = control_mode(messages, 1.0, 3)
+for i, choice in enumerate(response.choices):
+    print(f'{i+1}: {choice.message.content}')
