@@ -87,3 +87,17 @@ print('content 2:', response.choices[0].message.content)
 # This shows that the system prompt mainly affects tone and style, not the correctness of the content.
 
 
+print('System Question 2')
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "My name is Jordan and I'm learning Python."},
+    {"role": "assistant", "content": "Nice to meet you, Jordan! Python is a great choice. What would you like to work on?"},
+    {"role": "user", "content": "Can you remind me what my name is?"}
+]
+response = control_mode(messages, 0.7, 1)
+print('content:', response.choices[0].message.content)
+
+# The model knows Jordan's name because the full conversation history is included in the messages list.
+# Even though the API is stateless (it does not remember previous requests),
+# we manually provide all previous context in the current request, so the model can "see" the name.
+
