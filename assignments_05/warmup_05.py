@@ -192,3 +192,27 @@ print()
 # - One-shot: when format consistency is important.
 # - Few-shot: when you need high accuracy and strict output format.
 
+
+print('Prompt Question 4 — Chain of Thought')
+messages=[{'role': "user", "content":"""
+            Solve the following problem. Explain your reasoning step by step, and then clearly state the final answer.
+                
+            A data engineer earns $85,000 per year.
+            She gets a 12% raise, then 6 months later takes a new job that pays $7,500 more per year than her post-raise salary.
+
+            What is her final annual salary?
+
+            Final Answer: ...
+           """
+           }]
+
+response = control_mode(messages, 0.7, 1)
+print('content:', response.choices[0].message.content)
+print()
+
+# Asking the model to reason step by step improves accuracy because it breaks 
+# a complex problem into smaller, structured steps.
+# This reduces the chance of skipping calculations or making mental math errors, 
+# and helps the model follow logical progression instead of guessing the final answer directly.
+
+
