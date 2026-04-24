@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 from openai import OpenAI
+import json
+import re
 
 load_dotenv()
 client = OpenAI()
@@ -193,7 +195,7 @@ print()
 # - Few-shot: when you need high accuracy and strict output format.
 
 
-print('Prompt Question 4 — Chain of Thought')
+print('Prompt Question 4 — Chain of Thought\n')
 messages=[{'role': "user", "content":"""
             Solve the following problem. Explain your reasoning step by step, and then clearly state the final answer.
                 
@@ -214,5 +216,38 @@ print()
 # a complex problem into smaller, structured steps.
 # This reduces the chance of skipping calculations or making mental math errors, 
 # and helps the model follow logical progression instead of guessing the final answer directly.
+
+
+print('Prompt Question 5 — Structured Output\n')
+messages=[{'role': "user", "content":"""
+            Analyze the 'review' below and respond only with valid JSON with keys.
+                    
+            Return keys: sentiment, confidence (a float from 0 to 1), and reason (one sentence)
+                    
+            review = "I've been using this tool for three months. It handles large datasets well, \ but the UI is clunky and the export options are limited."
+
+           """
+           }]
+response = control_mode(messages, 0.7, 1)
+
+reviews_content = response.choices[0].message.content
+print("Raw response:\n", reviews_content)
+print()
+
+text = reviews_content
+match = re.search(r"\{.*\}", text, re.S) # r"\{[\s\S]*?\}"
+print('match\n', match)
+
+try:
+    result = json.loads(match.group())
+    print("Parsed sentiment:", result["sentiment"])
+    print("Confidence:", result["confidence"])
+    print("Reason:", result["reason"])
+except json.JSONDecodeError:
+    print("Error: response was not valid JSON")
+
+# Structured output makes it easier to reliably parse model responses in code.
+# However, models may still add extra text or formatting (like markdown),
+# so we often need to extract JSON safely using regex and handle errors with try/except.
 
 
