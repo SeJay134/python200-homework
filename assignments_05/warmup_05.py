@@ -45,14 +45,15 @@ print()
 #
 # If I needed a consistent, reproducible output, I would use temperature = 0.
 
-print('API Question 3')
+print('API Question 3\n')
 prompt = "Give me a one-sentence fun fact about pandas (the animal, not the library)."
 messages=[{"role": "user", "content": prompt}]
 response = control_mode(messages, 1.0, 3)
 for i, choice in enumerate(response.choices):
     print(f'{i+1}: {choice.message.content}')
+print()
 
-print('API Question 4')
+print('API Question 4\n')
 prompt = 'Explain how neural networks work.'
 messages=[{"role": "user", "content": prompt}]
 response = control_mode(messages, 1.5, 1, 15)
@@ -65,7 +66,7 @@ print('max token 15', response.choices[0].message.content)
 # and prevent overly long or unstructured outputs (e.g., in chatbots or APIs with strict formatting limits).
 
 # System Messages and Personas
-print('System Question 1')
+print('System Question 1\n')
 messages = [
     {"role": "system", "content": "You are a patient, encouraging Python tutor. You always explain things simply and end with a word of encouragement."},
     {"role": "user", "content": "I don't understand what a list comprehension is."}
@@ -79,7 +80,7 @@ messages = [
 ]
 response = control_mode(messages, 0.7, 1)
 print('content 2:', response.choices[0].message.content)
-
+print()
 # The system message changed the personality of the model.
 # In the first case, it acted like a patient Python tutor with structured, detailed explanations.
 # In the second case, it became more playful and energetic (dance-themed), but the technical explanation
@@ -87,7 +88,7 @@ print('content 2:', response.choices[0].message.content)
 # This shows that the system prompt mainly affects tone and style, not the correctness of the content.
 
 
-print('System Question 2')
+print('System Question 2\n')
 messages = [
     {"role": "system", "content": "You are a helpful assistant."},
     {"role": "user", "content": "My name is Jordan and I'm learning Python."},
@@ -96,14 +97,14 @@ messages = [
 ]
 response = control_mode(messages, 0.7, 1)
 print('content:', response.choices[0].message.content)
-
+print()
 # The model knows Jordan's name because the full conversation history is included in the messages list.
 # Even though the API is stateless (it does not remember previous requests),
 # we manually provide all previous context in the current request, so the model can "see" the name.
 
 
 # Prompt Engineering
-print('Prompt Question 1 — Zero-Shot')
+print('Prompt Question 1 — Zero-Shot\n')
 reviews = [
     "The onboarding process was smooth and the team was welcoming.",
     "The software crashes constantly and support never responds.",
@@ -120,4 +121,32 @@ messages=[{'role': "user", "content": """
 
 response = control_mode(messages, 0.7, 1)
 print('content:', response.choices[0].message.content)
+print()
+
+print('Prompt Question 2 — One-Shot\n')
+messages=[{'role': "user", "content": """
+           Classify the sentiment of each review as positive, negative, or mixed.
+
+           Example:
+           Review: Fast shipping but the item arrived damaged.
+           Sentiment: mixed
+
+           Review 1: The onboarding process was smooth and the team was welcoming. 
+           Review 2: The software crashes constantly and support never responds. 
+           Review 3: Great price, but the documentation is nearly impossible to follow. 
+           Respond in this format:
+           Review 1: ...
+           Review 2: ...
+           Review 3: ...
+           """
+           }]
+
+response = control_mode(messages, 0.7, 1)
+print('content:', response.choices[0].message.content)
+print()
+# Adding one example improved consistency.
+# The model followed the required format more strictly and produced cleaner, more structured output
+# compared to zero-shot, where formatting was slightly more variable.
+
+
 
