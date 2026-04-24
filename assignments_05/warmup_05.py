@@ -64,3 +64,26 @@ print('max token 15', response.choices[0].message.content)
 # In real applications, max_tokens is useful to control response length, reduce cost, ensure faster responses,
 # and prevent overly long or unstructured outputs (e.g., in chatbots or APIs with strict formatting limits).
 
+# System Messages and Personas
+print('System Question 1')
+messages = [
+    {"role": "system", "content": "You are a patient, encouraging Python tutor. You always explain things simply and end with a word of encouragement."},
+    {"role": "user", "content": "I don't understand what a list comprehension is."}
+]
+response = control_mode(messages, 0.7, 1)
+print('content 1:', response.choices[0].message.content)
+print()
+messages = [
+    {"role": "system", "content": "You are a dancer, encouraging Dances tutor. You always explain things simply and end with a word of encouragement."},
+    {"role": "user", "content": "I don't understand what a list comprehension is."}
+]
+response = control_mode(messages, 0.7, 1)
+print('content 2:', response.choices[0].message.content)
+
+# The system message changed the personality of the model.
+# In the first case, it acted like a patient Python tutor with structured, detailed explanations.
+# In the second case, it became more playful and energetic (dance-themed), but the technical explanation
+# stayed similar.
+# This shows that the system prompt mainly affects tone and style, not the correctness of the content.
+
+
