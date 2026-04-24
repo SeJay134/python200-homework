@@ -101,3 +101,23 @@ print('content:', response.choices[0].message.content)
 # Even though the API is stateless (it does not remember previous requests),
 # we manually provide all previous context in the current request, so the model can "see" the name.
 
+
+# Prompt Engineering
+print('Prompt Question 1 — Zero-Shot')
+reviews = [
+    "The onboarding process was smooth and the team was welcoming.",
+    "The software crashes constantly and support never responds.",
+    "Great price, but the documentation is nearly impossible to follow."
+]
+
+messages=[{'role': "user", "content": """
+           Classify the sentiment of each review as positive, negative, or mixed. 
+           Review 1 The onboarding process was smooth and the team was welcoming. 
+           Review 2 The software crashes constantly and support never responds. 
+           Review 3 Great price, but the documentation is nearly impossible to follow. 
+           Respond in this format: Review 1: ..., Review 2: ..., Review 3: ..."""
+           }]
+
+response = control_mode(messages, 0.7, 1)
+print('content:', response.choices[0].message.content)
+
