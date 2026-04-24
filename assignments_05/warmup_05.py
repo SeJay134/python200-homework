@@ -149,4 +149,46 @@ print()
 # compared to zero-shot, where formatting was slightly more variable.
 
 
+print('Prompt Question 3 — Few-Shot\n')
+messages=[{'role': "user", "content":"""
+            Classify the sentiment of each review as positive, negative, or mixed.
+
+            Example 1:
+            Review: The app is easy to use and the customer support is very helpful.
+            Sentiment: positive
+
+            Example 2:
+            Review: The product stopped working after one day and I couldn’t get a refund.
+            Sentiment: negative
+
+            Example 3:
+            Review: The design looks great, but the battery life is too short.
+            Sentiment: mixed
+
+            Now classify the following reviews:
+
+            Review 1: The onboarding process was smooth and the team was welcoming.
+            Review 2: The software crashes constantly and support never responds.
+            Review 3: Great price, but the documentation is nearly impossible to follow.
+
+            Respond in this format:
+            Review 1: ...
+            Review 2: ...
+            Review 3: ...
+           """
+           }]
+
+response = control_mode(messages, 0.7, 1)
+print('content:', response.choices[0].message.content)
+print()
+
+# Comparison of approaches:
+# Zero-shot: no examples, fastest, but format may vary slightly.
+# One-shot: one example helps the model understand format better and improves consistency.
+# Few-shot: multiple examples make output most stable and accurate, especially for structured tasks.
+#
+# When to use:
+# - Zero-shot: simple tasks or when you want fast prompts.
+# - One-shot: when format consistency is important.
+# - Few-shot: when you need high accuracy and strict output format.
 
