@@ -4,12 +4,13 @@ from openai import OpenAI
 load_dotenv()
 client = OpenAI()
 
-def control_mode(messages, t, n):
+def control_mode(messages, t, n, max_tokens=None):
         response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
         temperature=t,
-        n=n
+        n=n,
+        max_tokens=max_tokens
     )
         return response
 
@@ -50,3 +51,16 @@ messages=[{"role": "user", "content": prompt}]
 response = control_mode(messages, 1.0, 3)
 for i, choice in enumerate(response.choices):
     print(f'{i+1}: {choice.message.content}')
+
+print('API Question 4')
+prompt = 'Explain how neural networks work.'
+messages=[{"role": "user", "content": prompt}]
+response = control_mode(messages, 1.5, 1, 15)
+print('max token 15', response.choices[0].message.content)
+
+# The response was cut off before the full explanation because max_tokens=15 limits the number of tokens
+# the model is allowed to generate, so the answer cannot be completed.
+#
+# In real applications, max_tokens is useful to control response length, reduce cost, ensure faster responses,
+# and prevent overly long or unstructured outputs (e.g., in chatbots or APIs with strict formatting limits).
+
