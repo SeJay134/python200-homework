@@ -3,6 +3,9 @@
 from dotenv import load_dotenv
 from openai import OpenAI
 
+if load_dotenv():
+    print("Successfully loaded api key")
+
 load_dotenv()
 client = OpenAI()
 
