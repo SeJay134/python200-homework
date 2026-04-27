@@ -251,3 +251,52 @@ except json.JSONDecodeError:
 # so we often need to extract JSON safely using regex and handle errors with try/except.
 
 
+print('Prompt Question 6 — Delimiters\n')
+
+user_text = "First boil a pot of water. Once boiling, add a handful of salt and the \
+pasta. Cook for 8-10 minutes until al dente. Drain and toss with your sauce of choice."
+
+prompt = f"""
+You will be given text inside triple backticks.
+If it contains step-by-step instructions, rewrite them as a numbered list.
+If it does not contain instructions, respond with exactly: "No steps provided."
+
+```{user_text}```
+"""
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages = [
+        {"role": "user", "content": f"""
+            You will be given text inside triple backticks.
+            If it contains step-by-step instructions, rewrite them as a numbered list.
+            If it does not contain instructions, respond with exactly: "No steps provided."
+
+            ```{user_text}```
+         
+        """}
+]
+)
+print(response.choices[0].message.content)
+print()
+
+non_instruction_text = "I really enjoy cooking on weekends and trying new recipes from different cultures."
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages = [
+        {"role": "user", "content": f"""
+            You will be given text inside triple backticks.
+            If it contains step-by-step instructions, rewrite them as a numbered list.
+            If it does not contain instructions, respond with exactly: "No steps provided."
+         
+            ```{non_instruction_text}```
+        """}
+]
+)
+print(response.choices[0].message.content)
+
+# Delimiters help prevent the model from confusing user input with instructions 
+# and reduce the risk of prompt injection or misinterpretation of where the input starts and ends.
+
+
+
+
