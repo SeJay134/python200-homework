@@ -1,0 +1,306 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import warnings
+
+from sklearn.datasets import load_iris, load_digits # scikit-learn
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    precision_score,
+    recall_score,
+    f1_score,
+    ConfusionMatrixDisplay
+)
+from sklearn.inspection import DecisionBoundaryDisplay
+
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
+iris = load_iris(as_frame=True)
+X = iris.data
+y = iris.target
+
+print('Preprocessing Question 1')
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+X_train_shape = X_train.shape
+print('X_train.shape', X_train_shape)
+print('y_train.shape', y_train.shape)
+X_test_shape = X_test.shape
+print('X_test.shape', X_test_shape)
+print('y_test.shape', y_test.shape)
+print()
+
+print('Preprocessing Question 2')
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+print('X_train_scaled.mean()', X_train_scaled.mean(axis=0))
+
+# The means of all columns in X_train_scaled are very close to 0, 
+# confirming that the StandardScaler has correctly centered the data. 
+# Small deviations from zero are due to floating-point precision and are expected.
+
+# KNN
+print('KNN Question 1')
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+
+preds = knn.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, preds))
+print(classification_report(y_test, preds))
+print()
+
+print('KNN Question 2')
+# Add a comment: does scaling improve performance, hurt it, 
+# or make no difference? Why might that be for this particular dataset?
+
+knn_q2 = KNeighborsClassifier(n_neighbors=5)
+knn_q2.fit(X_train_scaled, y_train)
+
+preds_q2 = knn_q2.predict(X_test_scaled)
+
+print("Accuracy_q2:", accuracy_score(y_test, preds_q2))
+print(classification_report(y_test, preds_q2))
+
+# Scaling slightly improves performance. 
+# Scaling ensures that all features contribute equally to the distance calculation
+
+print()
+
+print('KNN Question 3')
+# Add a comment: is this result more or less trustworthy than a single train/test split, and why?
+
+cv_scores = cross_val_score(knn, X_train, y_train, cv=5)
+
+print(cv_scores)
+print(f"Mean: {cv_scores.mean():.3f}")
+print(f"Std:  {cv_scores.std():.3f}")
+
+# This result is more trustworthy than a single train/test split 
+# because it evaluates the model across multiple different splits of the data.
+
+print()
+
+print('KNN Question 4')
+# Add a comment identifying which k you would choose and why.
+
+k_values = [1, 3, 5, 7, 9, 11, 13, 15]
+
+for k in k_values:
+    knn_q4 = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn_q4, X_train, y_train, cv=5)
+    print(f"k={k:2d}:  mean={scores.mean():.3f}  std={scores.std():.3f}")
+
+# I chose k = 7 because it provides a high mean cross-validation accuracy while maintaining 
+# a relatively low standard deviation. This indicates that the model performs well 
+# on average and is stable across different folds. A good choice of k balances accuracy 
+# and consistency, avoiding both overfitting (small k) and underfitting (large k).
+
+print()
+
+print('Classifier Evaluation Question 1')
+# Add a comment: which pair of species does the model most often confuse (if any)?
+
+cm = confusion_matrix(y_test, preds)
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=iris.target_names
+)
+
+disp.plot()
+plt.title("KNN Confusion Matrix (Iris)")
+plt.savefig('outputs/knn_confusion_matrix.png')
+plt.show()
+
+# The model most often confuses versicolor and virginica. 
+# These two classes have more similar feature values, especially in petal measurements, 
+# making them harder to distinguish. In contrast, setosa is almost always classified 
+# correctly because it is well separated from the other two classes.
+
+print()
+
+print('Decision Trees Question 1') 
+# Add a comment comparing the Decision Tree accuracy to KNN. Then add a second comment: 
+# given that Decision Trees don't rely on distance calculations, would scaled vs. 
+# unscaled data affect the result?
+
+model_dtc = DecisionTreeClassifier(max_depth=3, random_state=42)
+model_dtc.fit(X_train, y_train)
+preds = model_dtc.predict(X_test)
+
+print("Accuracy_dtq1:", accuracy_score(y_test, preds))
+print(classification_report(y_test, preds))
+
+# The Decision Tree achieves similar (or slightly lower) accuracy compared to KNN. 
+# While KNN relies on distance between points, the Decision Tree creates rule-based splits, 
+# which may not capture the same fine-grained structure in the data.
+
+# Scaling does not significantly affect Decision Trees because they do not rely 
+# on distance calculations. Instead, they split data based on feature thresholds, 
+# so the relative scale of features does not impact the model's decisions.
+
+# Logistic Regression and Regularization
+print('Logistic Regression Question 1')
+# Add a comment: what happens to the total coefficient magnitude as C increases? 
+# What does this tell you about what regularization is doing?
+
+log_reg_1 = LogisticRegression(
+    C=0.01,
+    max_iter=1000,
+    solver="lbfgs"
+)
+log_reg_1.fit(X_train_scaled, y_train)
+data_log_reg_1 = np.abs(log_reg_1.coef_).sum()
+print(f'Value C=0.01: {data_log_reg_1:.4f} underfitting')
+print()
+# Smaller C → stronger regularization → smaller coefficients (potential underfitting)
+
+log_reg_2 = LogisticRegression(
+    C=1.0,
+    max_iter=1000,
+    solver="lbfgs"
+)
+log_reg_2.fit(X_train_scaled, y_train)
+data_log_reg_2 = np.abs(log_reg_2.coef_).sum()
+print(f'Value C=1.0: {data_log_reg_2:.4f} balance')
+print()
+
+log_reg_3 = LogisticRegression(
+    C=100,
+    max_iter=1000,
+    solver="lbfgs"
+)
+log_reg_3.fit(X_train_scaled, y_train)
+data_log_reg_3 = np.abs(log_reg_3.coef_).sum()
+print(f'Value C=100: {data_log_reg_3:.4f} overfitting')
+print()
+
+# ValueError: The 'liblinear' solver does not support multiclass classification (n_classes >= 3). 
+# Either use another solver or wrap the estimator in a OneVsRestClassifier to keep applying a one-versus-rest scheme.
+
+# As C increases, the total magnitude of the coefficients increases. 
+# This happens because higher C reduces regularization, allowing the model to assign larger weights to features. 
+# This means the model becomes more flexible but also more prone to overfitting.
+
+print('PCA')
+
+digits = load_digits()
+X_digits = digits.data    # 1797 images, each flattened to 64 pixel values
+y_digits = digits.target  # digit labels 0-9
+images   = digits.images  # same data shaped as 8x8 images for plotting
+
+print('PCA Question 1')
+
+X_digits_shape = X_digits.shape
+print('X_digits.shape', X_digits_shape)
+print('X_digits\n', X_digits)
+print()
+images_shape = images.shape
+print('images.shape', images_shape)
+print('images\n', images)
+print()
+
+data = {}
+for i in range(len(y_digits)):
+    dig = y_digits[i]
+    if dig not in data:
+        data[dig] = i
+    if len(data)  == 10:
+        break
+print(data)
+
+fig, ax = plt.subplots(1, 10, figsize=(8, 2))
+for i in range(10):
+    ax[i].imshow(images[data[i]], cmap="gray_r")
+    ax[i].set_title(str(i))
+    ax[i].axis("off")
+plt.savefig('outputs/sample_digits.png')
+plt.show()
+
+print('PCA Question 2')
+
+# Add a comment: do same-digit images tend to cluster together in this 2D space?
+
+pca = PCA()
+pca.fit(X_digits)
+
+scores = pca.transform(X_digits)
+print(scores.shape)
+
+scatter = plt.scatter(scores[:, 0], scores[:, 1], c=y_digits, cmap='tab10', s=10)  # c = color array
+plt.colorbar(scatter, label='Digit')
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("PCA 2D projection of digits")
+plt.savefig('outputs/pca_2d_projection.png')
+plt.show()
+
+# Same-digit images tend to form visible clusters in the 2D PCA space. However, 
+# the clusters are not perfectly separated, and some overlap exists between similar digits 
+# (such as 3 and 5 or 4 and 9). This indicates that PCA captures some but not all of 
+# the structure in the data.
+
+print('PCA Question 3')
+# Add a comment: approximately how many components do you need to explain 80% of the variance?
+
+perc_exp_vals = np.cumsum(pca.explained_variance_ratio_)
+print(perc_exp_vals)
+
+plt.plot(range(1, len(perc_exp_vals) + 1), perc_exp_vals)
+plt.xlabel("Number of Components")
+plt.ylabel("Cumulative Explained Variance")
+plt.title("PCA Cumulative Explained Variance")
+plt.savefig('outputs/pca_variance_explained.png')
+plt.show()
+
+# how many components explain 80%
+n_components_80 = np.argmax(perc_exp_vals >= 0.80) + 1 # returns index of first value >= 0.80
+print("Components needed for 80% variance:", n_components_80)
+# Approximately 15–20 components are needed to explain around 80% of the variance.
+
+print('PCA Question 4')
+
+def reconstruct_digit(sample_idx, scores, pca, n_components):
+    """Reconstruct one digit using the first n_components principal components."""
+    reconstruction = pca.mean_.copy()
+    for i in range(n_components):
+        reconstruction = reconstruction + scores[sample_idx, i] * pca.components_[i]
+    return reconstruction.reshape(8, 8)
+
+# Add a comment: at what n do the digits become clearly recognizable, 
+# and does that match where the variance curve levels off?
+
+n_val = [2, 5, 15, 40]
+fig, axes = plt.subplots(5, 5, figsize=(10, 10), squeeze=False)
+
+# Original
+for col in range(5):
+    axes[0, col].imshow(images[col], cmap="gray_r")
+    axes[0, col].set_title(f'Digit {col}')
+    axes[0, col].axis('off')
+
+# Reconstruction
+for row, n in enumerate(n_val, start=1):
+    for col in range(5):
+        rec = reconstruct_digit(col, scores, pca, n)
+        axes[row, col].imshow(rec, cmap="gray_r")
+        axes[row, col].set_title(f'n={n}')
+        axes[row, col].axis('off')
+
+plt.tight_layout()
+plt.savefig('outputs/pca_reconstructions.png')
+plt.show()
+
+# Digits become clearly recognizable around n ≈ 15.
+# This matches the PCA variance plot where the curve begins to level off.
