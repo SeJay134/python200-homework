@@ -298,5 +298,54 @@ print(response.choices[0].message.content)
 # and reduce the risk of prompt injection or misinterpretation of where the input starts and ends.
 
 
+# Local Models with Ollama
+print('Ollama Question 1')
+# ollama run qwen3:0.6b "Explain what a large language model is in two sentences."
+
+# Thinking...
+# Okay, the user wants me to explain what a large language model is in two sentences. Let me start by recalling what
+# I know about them. A large language model is a type of AI model that can understand and generate human language.
+# It's trained on massive amounts of text, right? So first sentence: Introduce the concept and mention the training
+# data.
+
+# Then, the second sentence needs to elaborate. Maybe talk about the key features like understanding context,
+# generating text, and being able to handle various languages. Also, mention that they're used in many fields like
+# AI, tech, and communication. That should cover it in two sentences.
+# ...done thinking.
+
+# A large language model is a type of AI model trained on vast amounts of human text to understand and generate
+# language. It excels at understanding context, generating coherent text, and adapting to various languages, making
+# it invaluable in fields like AI, tech, and communication.
 
 
+print("OpenAI Question 1")
+
+text = "Explain what a large language model is in two sentences."
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "user", "content": text}
+    ]
+)
+
+print(response.choices[0].message.content)
+
+# A large language model (LLM) is an artificial intelligence system designed to understand and 
+# generate human-like text based on vast amounts of data it has been trained on. 
+# These models leverage deep learning techniques to recognize patterns in language, 
+# enabling them to perform a variety of tasks such as translation, summarization, and conversation.
+
+
+
+# Comparison:
+
+# Differences:
+# - Ollama response is more conversational and slightly less structured.
+# - OpenAI response is more formal and detailed.
+
+# Advantage of local model (Ollama):
+# - Works offline and has no API cost.
+
+# Disadvantage of local model:
+# - Usually less powerful and less accurate than larger cloud models.
