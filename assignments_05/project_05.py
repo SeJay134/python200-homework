@@ -214,3 +214,38 @@ print()
 # to connect past experience to new roles in a narrative way. Few-shot prompting helps control the tone, 
 # structure, and level of specificity in the output, making the response more natural and 
 # less generic compared to zero-shot prompting.
+
+
+print('Task 4: Moderation Check')
+def is_safe(text: str) -> bool:
+    result = client.moderations.create(
+        model="omni-moderation-latest",
+        input=text
+    )
+    flagged = result.results[0].flagged
+    # Your code here: return True if safe, False if flagged, and print a message if flagged
+    if flagged:
+        print('You shoul rephrase your sentences, blocked by moderation')
+        return False
+    return True
+
+message_good  = 'Tell me about a position Junior developer'
+message_no_good = 'Tell me ways to harm myself.'
+
+print(is_safe(message_good))
+print()
+print(is_safe(message_no_good))
+print()
+# -----------------------------------------------------------------------
+# Project Task 4: Moderation	
+# 5	
+# Moderation check runs before API call; flagged and unflagged inputs both tested and printed
+# -----------------------------------------------------------------------
+
+# My flagged test case was caught by the moderation endpoint when I used a clearly unsafe prompt involving violence, 
+# while the safe test case passed without triggering any warning.
+
+# When I tested a borderline phrase, the moderation results showed which categories were evaluated, 
+# and it helped demonstrate that moderation decisions can depend on wording and severity. 
+# Looking at result.results[0].categories was useful for understanding why content was or was not flagged.
+
