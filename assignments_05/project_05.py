@@ -147,3 +147,70 @@ print(side_by_side_data)
 # like "helped" and "made." The model improved them by using stronger action verbs, adding specific details, 
 # and including measurable outcomes such as percentages and time savings to make the experience more impactful and professional.
 
+print('Task 3: Cover Letter Generator')
+def generate_cover_letter(job_title: str, background: str) -> str:
+# -------------------------------------------------------------------------------
+# Project Task 3: Cover letter	
+# 10	
+# Two or more few-shot examples present in the prompt; 
+# output is tailored to the input; comment explains example choices
+
+    # Extra examples explanation:
+    # I chose both examples to represent common career transition scenarios:
+    # (1) healthcare → data analytics and (2) finance operations → software engineering.
+    # Both cases show a clear shift from non-technical or domain-heavy roles into more technical fields.
+    # This helps the model learn how to connect past domain experience to new target roles without sounding generic.
+    # The examples also demonstrate a strong narrative structure: past experience → turning point → new skills → target role fit.
+    # This encourages the model to produce opening paragraphs that are specific, story-driven, and tailored rather than template-like.
+# -------------------------------------------------------------------------------
+
+    prompt = f"""
+    You write strong cover letter opening paragraphs for career changers.
+    The paragraph should be 3-5 sentences: confident, specific, and free of clichés.
+
+    Here are two examples of the style and tone you should match:
+
+    Example 1:
+    Role: Data Analyst at a healthcare nonprofit
+    Background: Seven years as a registered nurse, recently completed a data analytics bootcamp.
+    Opening: After seven years as a registered nurse, I've spent my career making decisions
+    under pressure using incomplete information — which turns out to be excellent training for
+    data analysis. I recently completed a data analytics program where I built dashboards
+    tracking patient outcomes across departments. I'm excited to bring that combination of
+    clinical context and technical skill to [Company]'s mission-driven work.
+
+    Example 2:
+    Role: Junior Software Engineer at a fintech startup
+    Background: Ten years in retail banking operations, self-taught Python developer for two years.
+    Opening: I spent a decade on the operations side of banking, watching technology decisions
+    get made by people who had never processed a wire transfer or resolved a failed ACH batch.
+    That frustration turned into curiosity, and two years of self-teaching Python later, I'm
+    ready to be on the other side of those decisions. I'm applying to [Company] because your
+    work on payment infrastructure is exactly where my domain expertise and new technical skills
+    intersect.
+
+    Now write an opening paragraph for this person:
+    Role: {job_title}
+    Background: {background}
+    Opening:
+    """
+
+    messages = [{"role": "user", "content": prompt}]
+    # Your code here: call get_completion() and return the result
+
+    result = get_completion(messages)
+    print(result)
+
+    return result
+
+# Test it with:
+job_title = "Junior Data Engineer"
+background = "Five years of experience as a middle school math teacher; recently completed \
+a Python course and built data pipelines using Prefect and Pandas."
+generate_cover_letter(job_title, background)
+print()
+
+# I chose examples that show career transitions because the goal is to help the model learn how 
+# to connect past experience to new roles in a narrative way. Few-shot prompting helps control the tone, 
+# structure, and level of specificity in the output, making the response more natural and 
+# less generic compared to zero-shot prompting.
