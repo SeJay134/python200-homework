@@ -329,3 +329,40 @@ def run_chatbot():
 if __name__ == "__main__":
     run_chatbot()
 
+print('Task 6: Ethics Reflection')
+# Option A — Comment block: At the bottom of project_05.py, add a comment block responding to the questions below. 
+# Write at least 3-5 sentences total.
+
+# I think the bot was trained by many sources and its advice could reflect biases in those sources.
+# During interaction, the model may misinterpret questions and produce incorrect or 
+# minimally useful results. Without providing examples in the prompt or 
+# a detailed task description, the model may choose any style or example that seems closest 
+# in meaning, even if it alters the intended message.
+# Accordingly, without additional instructions, context, or examples, the model may choose 
+# any plausible pattern and generate a response without truly understanding 
+# the intended meaning. This means that with a poorly defined task, the model’s answer 
+# can be partially random.
+
+# It might favor certain professional communication styles, industries like tech 
+# or corporate environments, or assumptions that fit some cultural backgrounds more than others. 
+# Of course that could make some advice less useful.
+
+# This could lead to an awkward situation, and the work will most likely be declined. 
+# In the future, the model may lose popularity due to these issues and, as a result, 
+# become economically unviable to maintain.
+
+# I would start by introducing a set of rules and limitations for users, 
+# allowing them to understand what is permitted and what constitutes a violation—similar 
+# to safety guidelines, along with user acknowledgment that certain actions may lead 
+# to consequences in specific situations.
+
+# For example, if a user receives a response on a medical topic, attempting to perform 
+# a procedure without practical experience or guidance from a qualified professional 
+# would make such advice questionable and potentially unsafe.
+
+# It would also be important to include age restrictions, requiring parental consent 
+# for children and teenagers under 18, along with stricter limitations on sensitive topics.
+
+# Additionally, the model could provide more guidance to help users refine their queries, 
+# making it easier to adjust requests and improve the quality of the responses.
+
